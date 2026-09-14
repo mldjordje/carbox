@@ -6,6 +6,7 @@ import { Navbar } from '@/components/landing/Navbar';
 import { HeroSection } from '@/components/landing/HeroSection';
 import { ManifestSection } from '@/components/landing/ManifestSection';
 import { ThreeSection } from '@/components/landing/ThreeSection';
+import { ReelsSection } from '@/components/landing/ReelsSection';
 import { BrandsSection } from '@/components/landing/BrandsSection';
 import { InventorySection } from '@/components/landing/InventorySection';
 import { TradeInSection } from '@/components/landing/TradeInSection';
@@ -45,12 +46,16 @@ export default function Home() {
         }}
       />
 
-      {/* S01: Hero Statement (No 3D Model here) */}
+      {/* S01: Awwwards Video Hero + Instagram Stories Ribbon */}
       <HeroSection
         onOpenTestDrive={() => handleOpenTestDrive()}
+        onSelectBrand={(brandId) => {
+          const el = document.getElementById('brendovi');
+          el?.scrollIntoView({ behavior: 'smooth' });
+        }}
       />
 
-      {/* S02: Silent Editorial Manifest & Key Pillars */}
+      {/* S02: Silent Editorial Manifest */}
       <ManifestSection />
 
       {/* S03: 3D Digital Showroom (Civic RS & CR-V 2026) */}
@@ -58,7 +63,10 @@ export default function Home() {
         onOpenTestDrive={() => handleOpenTestDrive()}
       />
 
-      {/* S04: Brand Ecosystem */}
+      {/* S04: Instagram Reels & Showroom Live Atmosphere */}
+      <ReelsSection />
+
+      {/* S05: Brand Ecosystem & Story */}
       <BrandsSection
         onSelectBrand={(brandId) => {
           const el = document.getElementById('lager');
@@ -66,7 +74,7 @@ export default function Home() {
         }}
       />
 
-      {/* S05: Inventory & Natural Language Search */}
+      {/* S06: Minimalist Inventory & Natural Language Search */}
       <InventorySection
         onSelectVehicle={(vehicle) => setSelectedVehicle(vehicle)}
         onOpenFinanceModal={(vehicle) => {
@@ -75,21 +83,21 @@ export default function Home() {
         }}
       />
 
-      {/* S06: "Staro za Novo" Certified Trade-In */}
+      {/* S07: "Staro za Novo" Certified Trade-In */}
       <TradeInSection />
 
-      {/* S07: Finance & Leasing Calculator */}
+      {/* S08: Finance & Leasing Calculator */}
       <FinanceCalculatorSection />
 
-      {/* S08: Moto & Powersports */}
+      {/* S09: Moto & Powersports */}
       <MotoATVSection
         onOpenTestRide={() => handleOpenTestDrive()}
       />
 
-      {/* S09: Service Center */}
+      {/* S10: Service Center */}
       <ServiceSection />
 
-      {/* S10: Location & Footer */}
+      {/* S11: Location & Footer */}
       <ContactFooterSection />
 
       {/* Mobile-First Floating Thumb Bar */}
