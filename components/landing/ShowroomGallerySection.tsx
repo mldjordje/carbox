@@ -121,15 +121,15 @@ export function ShowroomGallerySection() {
           </div>
         </div>
 
-        {/* Large Format Master Photo Hero */}
-        <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[21/9] rounded-3xl overflow-hidden bg-neutral-950 border border-white/10 shadow-2xl group">
+        {/* Large Format Master Photo Hero - Unobscured & Crystal Clear */}
+        <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[21/10] rounded-3xl overflow-hidden bg-neutral-950 border border-white/10 shadow-2xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.id}
-              initial={{ opacity: 0, scale: 1.03 }}
+              initial={{ opacity: 0, scale: 1.02 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-0"
             >
               <Image
@@ -139,43 +139,42 @@ export function ShowroomGallerySection() {
                 priority
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/40" />
             </motion.div>
           </AnimatePresence>
 
-          {/* Top Floating Badge */}
+          {/* Top Floating Subtle Category Tag */}
           <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10 flex items-center space-x-2">
-            <span className="text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-white font-bold">
+            <span className="text-[10px] font-mono uppercase tracking-widest px-3 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-white font-bold">
               {current.category}
             </span>
-            <div className="hidden sm:flex items-center space-x-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-mono text-emerald-400">
+            <div className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-mono text-emerald-400">
               <ShieldCheck className="w-3 h-3" />
-              <span>AUTENTIČAN SALON CAR BOX NIŠ</span>
+              <span>CAR BOX NIŠ · BULEVAR CARA KONSTANTINA 80-82</span>
             </div>
           </div>
+        </div>
 
-          {/* Bottom Caption Overlay */}
-          <div className="absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 sm:right-8 z-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div className="max-w-2xl space-y-1">
-              <h3 className="text-xl sm:text-3xl font-display font-medium text-white tracking-tight">
-                {current.title}
-              </h3>
-              <p className="text-xs sm:text-sm text-neutral-300 font-light">
-                {current.subtitle}
-              </p>
-              <div className="text-[10px] sm:text-[11px] font-mono text-neutral-400 pt-1">
-                {current.specs}
-              </div>
+        {/* Dedicated Uncluttered Editorial Info Strip (Directly Below Image) */}
+        <div className="mt-4 p-5 sm:p-7 rounded-2xl bg-neutral-950 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="text-[10px] font-mono text-[#c8102e] uppercase font-bold tracking-wider">
+              {current.category} · 4.500 m²
             </div>
-
-            <a
-              href="#kontakt"
-              className="inline-flex items-center space-x-2 px-5 py-3 rounded-full bg-white hover:bg-neutral-200 text-black text-xs font-mono uppercase tracking-wider font-bold transition-all shrink-0 self-start sm:self-auto shadow-lg"
-            >
-              <MapPin className="w-3.5 h-3.5 text-[#c8102e]" />
-              <span>Posetite Salon</span>
-            </a>
+            <h3 className="text-lg sm:text-2xl font-display font-medium text-white tracking-tight">
+              {current.title}
+            </h3>
+            <p className="text-xs sm:text-sm text-neutral-400 font-light">
+              {current.subtitle}
+            </p>
           </div>
+
+          <a
+            href="#kontakt"
+            className="inline-flex items-center space-x-2 px-5 py-3 rounded-full bg-white hover:bg-neutral-200 text-black text-xs font-mono uppercase tracking-wider font-bold transition-all shrink-0 self-start sm:self-auto shadow-md active:scale-95"
+          >
+            <MapPin className="w-3.5 h-3.5 text-[#c8102e]" />
+            <span>Posetite Salon</span>
+          </a>
         </div>
 
         {/* Thumbnail Preview Strip */}

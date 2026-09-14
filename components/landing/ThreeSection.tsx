@@ -1,8 +1,8 @@
 'use client';
 
-import { Suspense, useState, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Html } from '@react-three/drei';
+import { Suspense, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { HondaCivic } from '@/components/three/HondaCivic';
 import { HondaCRV } from '@/components/three/HondaCRV';
@@ -10,27 +10,15 @@ import { Showroom, CursorSpotlight } from '@/components/three/Showroom';
 import { HONDA_PAINTS, type PaintId } from '@/lib/car-paint';
 import { RevealText, RevealParagraph } from '@/components/ui/RevealText';
 import { OdometerNumber } from '@/components/ui/OdometerNumber';
-import { RotateCw, Lightbulb, Calendar, Sparkles, Eye, Shield, Zap, Compass, Check } from 'lucide-react';
+import { RotateCw, Lightbulb, Calendar, Move } from 'lucide-react';
+
+if (typeof window !== 'undefined') {
+  useGLTF.preload('/models/honda_civic_rs.glb');
+  useGLTF.preload('/models/honda_cr-v_2026.glb');
+}
 
 interface Props {
   onOpenTestDrive?: () => void;
-}
-
-// Camera Target Rig for smooth cinematic camera transitions
-function CameraPresetRig({ targetPos, targetLook }: { targetPos: [number, number, number]; targetLook: [number, number, number] }) {
-  const lookVector = useRef(new THREE.Vector3(...targetLook));
-  const posVector = useRef(new THREE.Vector3(...targetPos));
-
-  useFrame((state, delta) => {
-    const k = 1 - Math.pow(0.001, delta);
-    posVector.current.set(...targetPos);
-    lookVector.current.set(...targetLook);
-
-    state.camera.position.lerp(posVector.current, k);
-    state.camera.lookAt(lookVector.current);
-  });
-
-  return null;
 }
 
 export function ThreeSection({ onOpenTestDrive }: Props) {
@@ -38,16 +26,6 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
   const [paint, setPaint] = useState<PaintId>('sonic_gray');
   const [lightsOn, setLightsOn] = useState(true);
   const [isRotating, setIsRotating] = useState(false);
-  const [cameraPreset, setCameraPreset] = useState<'overview' | 'engine' | 'wheel' | 'aero'>('overview');
-  const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
-
-  // Camera presets coordinates: [x, y, z] position, [x, y, z] lookAt
-  const presets: Record<string, { pos: [number, number, number]; look: [number, number, number] }> = {
-    overview: { pos: [5.4, 1.7, 5.8], look: [0, 0.7, 0] },
-    engine: { pos: [0.2, 2.2, 3.8], look: [0, 0.7, 1.2] },
-    wheel: { pos: [3.4, 0.8, 2.4], look: [1.2, 0.4, 1.0] },
-    aero: { pos: [-4.6, 1.4, -4.2], look: [0, 0.7, 0] },
-  };
 
   const modelSpecs = {
     civic: {
@@ -60,11 +38,6 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
       accel: '7.8 s',
       consumption: '4.7 l',
       trunk: '410 L',
-      hotspots: [
-        { id: 'engine', title: '2.0 e:HEV Pogonski Agregat', desc: 'Atkinson benzinac sa dva snažna elektromotora i trenutnih 315 Nm obrtnog momenta.', pos: [0, 1.1, 1.5] as [number, number, number] },
-        { id: 'wheel', title: '18" Matte Black Felne', desc: 'Laki aluminijumski naplaci sa niskoprofilnim Michelin sportskim pneumaticima.', pos: [1.0, 0.5, 1.4] as [number, number, number] },
-        { id: 'lights', title: 'Full LED Matrix Svetlosni Snop', desc: 'Automatsko adaptivno praćenje krivina i senčenje nadolazećih vozila.', pos: [0.6, 0.85, 2.2] as [number, number, number] },
-      ],
     },
     crv: {
       name: 'Honda CR-V 2.0 e:PHEV Advance',
@@ -76,16 +49,10 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
       accel: '9.0 s',
       consumption: '0.8 l',
       trunk: '617 L',
-      hotspots: [
-        { id: 'engine', title: 'e:PHEV Plug-in Hibrid', desc: 'Do 82 km čiste bešumne električne vožnje uz brzo punjenje baterije.', pos: [0, 1.25, 1.6] as [number, number, number] },
-        { id: 'wheel', title: '19" Diamond Cut Naplaci', desc: 'Aerodinamični točkovi konstruisani za minimalan otpor vazduha i maksimalnu tišinu.', pos: [1.05, 0.6, 1.5] as [number, number, number] },
-        { id: 'lights', title: 'Honda SENSING 360® Radar', desc: 'Pet radarskih senzora sa kompletnim pokrivanjem mrtvih uglova.', pos: [0.7, 0.95, 2.3] as [number, number, number] },
-      ],
     },
   };
 
   const current = modelSpecs[activeModel];
-  const activePreset = presets[cameraPreset];
 
   return (
     <section id="3d-showroom" className="relative py-28 sm:py-36 bg-[#08080a] border-t border-neutral-900 overflow-hidden">
@@ -104,11 +71,11 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
               </h2>
             </RevealText>
             <RevealParagraph delay={0.3} className="mt-2 text-sm text-neutral-400 max-w-lg font-light">
-              Istražite inženjerske detalje u realnom vremenu uz 360° rotaciju, fabričke boje laka i interaktivne fokus tačke.
+              Slobodna 360° rotacija vozila u realnom vremenu uz fabričke boje karoserije, svetlosne efekte i inženjersku specifikaciju.
             </RevealParagraph>
           </div>
 
-          {/* Model Switcher with Audio Feedback */}
+          {/* Model Switcher */}
           <div className="flex items-center p-1 rounded-xl bg-neutral-900/90 border border-white/10 shadow-xl">
             <button
               type="button"
@@ -116,7 +83,6 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
               onClick={() => {
                 setActiveModel('civic');
                 setPaint('sonic_gray');
-                setCameraPreset('overview');
               }}
               className={`px-5 py-2.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all ${
                 activeModel === 'civic'
@@ -132,7 +98,6 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
               onClick={() => {
                 setActiveModel('crv');
                 setPaint('crystal_black');
-                setCameraPreset('overview');
               }}
               className={`px-5 py-2.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all ${
                 activeModel === 'crv'
@@ -158,7 +123,7 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
               toneMapping: THREE.ACESFilmicToneMapping,
               powerPreference: 'high-performance',
             }}
-            camera={{ position: activePreset.pos, fov: 38, near: 0.1, far: 100 }}
+            camera={{ position: [5.4, 1.8, 5.8], fov: 38, near: 0.1, far: 100 }}
             className="!absolute inset-0 cursor-grab active:cursor-grabbing"
           >
             <color attach="background" args={['#070709']} />
@@ -176,40 +141,9 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
                 visible={activeModel === 'crv'}
               />
               <Showroom intensity={1.15} />
-
-              {/* Pinned 3D Interactive Hotspots */}
-              {current.hotspots.map((hs) => (
-                <Html key={hs.id} position={hs.pos} center distanceFactor={8}>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveHotspot(activeHotspot === hs.id ? null : hs.id);
-                      if (hs.id === 'engine') setCameraPreset('engine');
-                      else if (hs.id === 'wheel') setCameraPreset('wheel');
-                      else setCameraPreset('overview');
-                    }}
-                    className="relative group focus:outline-none"
-                  >
-                    <span className="absolute -inset-2 rounded-full bg-[#c8102e]/40 animate-ping" />
-                    <span className="relative w-5 h-5 rounded-full bg-[#c8102e] border-2 border-white flex items-center justify-center text-[10px] text-white font-bold shadow-[0_0_12px_rgba(200,16,46,0.9)] group-hover:scale-125 transition-transform">
-                      +
-                    </span>
-
-                    {/* Hotspot Floating Callout */}
-                    {activeHotspot === hs.id && (
-                      <div className="absolute left-6 top-1/2 -translate-y-1/2 w-60 p-3.5 rounded-2xl bg-black/90 backdrop-blur-xl border border-white/20 text-left shadow-2xl text-white pointer-events-auto z-50">
-                        <div className="text-[10px] font-mono text-[#c8102e] font-bold uppercase">{hs.title}</div>
-                        <div className="text-[11px] text-neutral-300 font-light mt-1 leading-relaxed">{hs.desc}</div>
-                      </div>
-                    )}
-                  </button>
-                </Html>
-              ))}
             </Suspense>
 
             <CursorSpotlight />
-            <CameraPresetRig targetPos={activePreset.pos} targetLook={activePreset.look} />
 
             {/* Stage Floor */}
             <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.001, 0]} receiveShadow>
@@ -222,12 +156,12 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
               autoRotate={isRotating}
               autoRotateSpeed={1.2}
               enablePan={false}
-              minPolarAngle={0.15}
+              minPolarAngle={0.12}
               maxPolarAngle={Math.PI / 2.05}
               minDistance={3.2}
               maxDistance={12}
               enableDamping
-              dampingFactor={0.06}
+              dampingFactor={0.05}
             />
           </Canvas>
 
@@ -249,27 +183,12 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
             </div>
           </div>
 
-          {/* Top Right Controls & Cinematic Camera Angles */}
+          {/* Top Right Controls & Hints */}
           <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex flex-col items-end space-y-2">
-            {/* Camera Perspective Switcher */}
-            <div className="p-1 rounded-xl bg-black/60 backdrop-blur-xl border border-white/10 flex items-center space-x-1 text-[10px] font-mono">
-              {[
-                { id: 'overview', label: '360°' },
-                { id: 'engine', label: 'HIBRID' },
-                { id: 'wheel', label: 'FELNE' },
-                { id: 'aero', label: 'AERO' },
-              ].map((cam) => (
-                <button
-                  key={cam.id}
-                  type="button"
-                  onClick={() => setCameraPreset(cam.id as any)}
-                  className={`px-2.5 py-1.5 rounded-lg transition-colors ${
-                    cameraPreset === cam.id ? 'bg-white text-black font-bold' : 'text-neutral-400 hover:text-white'
-                  }`}
-                >
-                  {cam.label}
-                </button>
-              ))}
+            {/* Interactive 360 Rotation Badge */}
+            <div className="px-3 py-1.5 rounded-xl bg-black/70 backdrop-blur-xl border border-white/15 flex items-center space-x-2 text-[10px] font-mono text-neutral-300">
+              <Move className="w-3.5 h-3.5 text-[#c8102e]" />
+              <span>360° SLOBODNA ROTACIJA</span>
             </div>
 
             <button
@@ -280,7 +199,7 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
               }`}
             >
               <RotateCw className={`w-3.5 h-3.5 ${isRotating ? 'animate-spin' : ''}`} />
-              <span className="hidden sm:inline">ROTACIJA</span>
+              <span className="hidden sm:inline">AUTOMATSKA ROTACIJA</span>
             </button>
 
             <button

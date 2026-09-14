@@ -27,7 +27,7 @@ export function MotoATVSection({ onOpenTestRide }: Props) {
       badge: 'Japanska Pouzdanost',
       desc: 'Ovlašćeni diler za Honda motocikle: od gradskih skutera (PCX 125, ADV 350) do touring i adventure šampiona (Africa Twin, Transalp).',
       models: 'Honda CB650R · Forza 350 · Africa Twin · PCX 125',
-      image: '/images/unnamed (4).webp',
+      image: '/images/unnamed (3).webp',
     },
     {
       id: 'chinese' as const,
@@ -35,7 +35,7 @@ export function MotoATVSection({ onOpenTestRide }: Props) {
       badge: 'Kineski Tehnološki Lideri',
       desc: 'Nova generacija motocikala sa TFT ekranima, Bosch ubrizgavanjem, Keyless sistemom i konkurentnim cenama.',
       models: 'Zontes 350E · QJMotor SRT 700 · Voge 525DSX',
-      image: '/images/unnamed (2).webp',
+      image: '/images/unnamed (7).webp',
     },
     {
       id: 'atv' as const,
@@ -50,10 +50,10 @@ export function MotoATVSection({ onOpenTestRide }: Props) {
   const current = tabs.find((t) => t.id === activeTab)!;
 
   return (
-    <section id="moto-atv" className="relative py-28 bg-[#08080a] border-t border-neutral-900">
+    <section id="moto-atv" className="relative py-24 sm:py-32 bg-[#08080a] border-t border-neutral-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
             <RevealText delay={0.1}>
               <div className="text-[11px] font-mono tracking-[0.2em] text-[#c8102e] uppercase font-semibold mb-2">
@@ -65,15 +65,15 @@ export function MotoATVSection({ onOpenTestRide }: Props) {
                 Svet <span className="editorial-italic font-normal text-white">dvotočkaša</span>.
               </h2>
             </RevealText>
-            <RevealParagraph delay={0.3} className="mt-2 text-sm text-neutral-400 max-w-xl font-light">
-              Ovlašćeni prodajno-servisni centar za Honda motocikle, Piaggio grupaciju (Vespa, Aprilia, Moto Guzzi), Zontes, QJMotors, Voge, i Segway ATV.
-            </RevealParagraph>
+            <p className="mt-2 text-xs sm:text-sm text-neutral-400 max-w-xl font-light">
+              Ovlašćeni prodajno-servisni centar za Honda motocikle, Piaggio, Vespa, Aprilia i Segway ATV.
+            </p>
           </div>
 
           <button
             type="button"
             onClick={onOpenTestRide}
-            className="flex items-center space-x-2 px-5 py-3 rounded-xl border border-white/15 hover:border-white/40 text-white text-xs font-mono uppercase tracking-wider transition-colors"
+            className="flex items-center space-x-2 px-5 py-3 rounded-full border border-white/15 hover:border-white/40 text-white text-xs font-mono uppercase tracking-wider transition-colors shrink-0"
           >
             <Bike className="w-4 h-4 text-[#c8102e]" />
             <span>Zakaži Test Motora</span>
@@ -100,11 +100,10 @@ export function MotoATVSection({ onOpenTestRide }: Props) {
         </div>
 
         {/* Display Stage */}
-        <div className="luxury-card rounded-3xl p-6 sm:p-10">
+        <div className="luxury-card rounded-3xl p-6 sm:p-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-6 relative aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-950 border border-white/10">
+            <div className="lg:col-span-6 relative aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden bg-neutral-950 border border-white/10 shadow-xl">
               <Image src={current.image} alt={current.title} fill className="object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-transparent to-transparent opacity-80" />
             </div>
 
             <div className="lg:col-span-6 space-y-4">

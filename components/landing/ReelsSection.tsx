@@ -82,6 +82,45 @@ export function ReelsSection() {
           </a>
         </div>
 
+        {/* Instagram Stories Highlights Bar */}
+        <div className="mb-10 p-4 rounded-2xl bg-neutral-950/80 border border-white/5">
+          <div className="flex items-center justify-between text-[10px] font-mono text-neutral-400 uppercase tracking-widest mb-3">
+            <span>PRIČE SA SALONA (@CARBOX_NIS):</span>
+            <span className="hidden sm:inline">PREVUCI ZA SVE BRENDOVE →</span>
+          </div>
+
+          <div className="flex items-center space-x-4 overflow-x-auto pb-1 scrollbar-none">
+            {[
+              { id: 'honda', name: 'Honda', badge: 'e:HEV' },
+              { id: 'peugeot', name: 'Peugeot', badge: 'GT' },
+              { id: 'opel', name: 'Opel', badge: 'GS' },
+              { id: 'suzuki', name: 'Suzuki', badge: '4x4' },
+              { id: 'jetour', name: 'JETOUR', badge: 'SUV' },
+              { id: 'honda-moto', name: 'Honda Moto', badge: 'Moto' },
+              { id: 'piaggio-vespa', name: 'Vespa', badge: 'Skuter' },
+              { id: 'aprilia', name: 'Aprilia', badge: 'Sport' },
+              { id: 'segway-atv', name: 'Segway', badge: 'ATV' },
+              { id: 'zontes', name: 'Zontes', badge: 'Moto' },
+              { id: 'voge', name: 'Voge', badge: 'Moto' },
+            ].map((b) => (
+              <a
+                key={b.id}
+                href="#brendovi"
+                className="flex flex-col items-center space-y-1.5 shrink-0 group focus:outline-none"
+              >
+                <div className="w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-[#c8102e] via-amber-500 to-[#e60012] group-hover:scale-110 transition-transform shadow-md">
+                  <div className="w-full h-full rounded-full bg-[#0e0e14] flex items-center justify-center p-1 border border-black text-white font-mono text-[9px] font-bold text-center">
+                    {b.name.split(' ')[0]}
+                  </div>
+                </div>
+                <span className="text-[10px] font-mono text-neutral-400 group-hover:text-white transition-colors truncate max-w-[60px]">
+                  {b.name}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+
         {/* Reels Vertical Cards Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {reels.map((r) => (

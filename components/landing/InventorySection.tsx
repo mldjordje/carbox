@@ -121,47 +121,42 @@ export function InventorySection({ onSelectVehicle, onOpenFinanceModal }: Props)
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e12] via-transparent to-transparent opacity-80" />
                   
                   {/* Badge */}
                   <div className="absolute top-3 left-3 flex gap-2">
-                    <span className="text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-neutral-950/90 text-white border border-white/10">
+                    <span className="text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/80 text-white border border-white/10 font-semibold">
                       {car.badge || car.brand}
                     </span>
                     {car.has3D && (
-                      <span className="text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-[#c8102e] text-white flex items-center space-x-1">
+                      <span className="text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-[#c8102e] text-white flex items-center space-x-1 font-semibold">
                         <Sparkles className="w-2.5 h-2.5" />
                         <span>3D</span>
                       </span>
                     )}
                   </div>
+                </div>
 
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <div className="text-[11px] font-mono text-[#c8102e]">{car.brand}</div>
+                {/* Specs & Title */}
+                <div className="p-5 space-y-3">
+                  <div>
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#c8102e] font-semibold">{car.brand}</div>
                     <h3 className="text-lg font-display font-medium text-white tracking-tight">
                       {car.model}
                     </h3>
                   </div>
-                </div>
 
-                {/* Specs */}
-                <div className="p-6 space-y-4">
-                  <p className="text-xs text-neutral-400 font-light line-clamp-2 leading-relaxed">
-                    {car.highlight}
-                  </p>
-
-                  <div className="grid grid-cols-3 gap-2 text-[10px] font-mono text-neutral-400 border-y border-neutral-850 py-3">
+                  <div className="grid grid-cols-3 gap-2 text-[10px] font-mono text-neutral-400 border-y border-neutral-850 py-2.5">
                     <div>
                       <div className="text-white font-bold">{car.powerHp} KS</div>
-                      <div className="text-neutral-400">Snaga</div>
+                      <div className="text-neutral-500">Snaga</div>
                     </div>
                     <div>
                       <div className="text-white font-bold truncate">{car.fuel.split(' ')[0]}</div>
-                      <div className="text-neutral-400">Gorivo</div>
+                      <div className="text-neutral-500">Gorivo</div>
                     </div>
                     <div>
                       <div className="text-white font-bold truncate">{car.transmission.split(' ')[0]}</div>
-                      <div className="text-neutral-400">Menjač</div>
+                      <div className="text-neutral-500">Menjač</div>
                     </div>
                   </div>
                 </div>

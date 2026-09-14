@@ -68,46 +68,46 @@ export function BrandsSection({ onSelectBrand }: Props) {
           {filtered.map((b) => (
             <div
               key={b.id}
-              className="luxury-card rounded-3xl p-6 flex flex-col justify-between group overflow-hidden"
+              className="luxury-card rounded-3xl p-5 sm:p-6 flex flex-col justify-between group overflow-hidden"
             >
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">
+                <div className="flex items-center justify-between mb-3 text-[10px] font-mono">
+                  <span className="uppercase tracking-widest text-neutral-400">
                     {b.origin} · {b.category.toUpperCase()}
                   </span>
-                  <span className="text-[10px] font-mono text-[#c8102e] uppercase font-semibold">
+                  <span className="text-[#c8102e] uppercase font-bold">
                     {b.badge}
                   </span>
                 </div>
 
-                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-950 mb-5 border border-white/5">
+                {/* Large Showroom Brand Photo */}
+                <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden bg-neutral-950 mb-4 border border-white/10">
                   <Image
                     src={b.image}
                     alt={b.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-transparent to-transparent opacity-85" />
-                  <div className="absolute bottom-3 left-3">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                  <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
                     <h3 className="text-2xl font-display font-medium text-white tracking-tight">
                       {b.name}
                     </h3>
+                    <span className="text-[10px] font-mono text-neutral-300 px-2 py-0.5 rounded bg-black/60 backdrop-blur-md border border-white/10">
+                      SALON NIŠ
+                    </span>
                   </div>
                 </div>
 
-                <div className="text-xs font-mono text-neutral-400 mb-2">
+                <div className="text-xs font-mono text-neutral-300 font-medium">
                   {b.tagline}
                 </div>
-
-                <p className="text-xs text-neutral-300 font-light leading-relaxed line-clamp-3">
-                  {b.description}
-                </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-neutral-850 flex items-center justify-between">
+              <div className="mt-4 pt-3 border-t border-neutral-850 flex items-center justify-between">
                 <div>
-                  <div className="text-[10px] font-mono text-neutral-400 uppercase">MODELI:</div>
-                  <div className="text-xs font-mono font-bold text-white truncate max-w-[200px]">
+                  <div className="text-[9px] font-mono text-neutral-400 uppercase">MODELI U SALONU:</div>
+                  <div className="text-xs font-mono font-bold text-white truncate max-w-[210px]">
                     {b.modelsCount}
                   </div>
                 </div>
@@ -115,7 +115,8 @@ export function BrandsSection({ onSelectBrand }: Props) {
                 <a
                   href="#lager"
                   onClick={() => onSelectBrand?.(b.id)}
-                  className="p-2.5 rounded-xl border border-white/10 hover:border-white/30 text-white transition-colors"
+                  className="p-2.5 rounded-xl bg-white/10 hover:bg-white hover:text-black text-white transition-all active:scale-95"
+                  title="Pogledaj modele"
                 >
                   <ArrowRight className="w-4 h-4" />
                 </a>

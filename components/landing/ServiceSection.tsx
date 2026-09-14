@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { CARBOX_SERVICES } from '@/lib/content/services';
 import { RevealText, RevealParagraph } from '@/components/ui/RevealText';
-import { Wrench, CheckCircle2, PhoneCall, Calendar } from 'lucide-react';
+import { Wrench, CheckCircle2, PhoneCall, Calendar, ShieldCheck } from 'lucide-react';
 
 export function ServiceSection() {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ export function ServiceSection() {
   const [isBooked, setIsBooked] = useState(false);
 
   return (
-    <section id="servis" className="relative py-28 bg-[#08080a] border-t border-neutral-900">
+    <section id="servis" className="relative py-24 sm:py-32 bg-[#08080a] border-t border-neutral-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -66,19 +67,35 @@ export function ServiceSection() {
           ))}
         </div>
 
-        {/* Simple Appointment Form */}
+        {/* Simple Appointment Form with Authentic Facility Photo */}
         <div className="luxury-card rounded-3xl p-6 sm:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-5 space-y-3">
-              <span className="text-[10px] font-mono text-[#c8102e] uppercase tracking-widest font-semibold">
-                ONLINE ZAKAZIVANJE
-              </span>
-              <h3 className="text-2xl font-display font-medium text-white">
-                Rezervišite termin bez čekanja u redu
-              </h3>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed">
-                Prijemno odeljenje Car Box servisa u Nišu priprema neophodne delove pre vašeg dolaska.
-              </p>
+            <div className="lg:col-span-5 space-y-4">
+              <div>
+                <span className="text-[10px] font-mono text-[#c8102e] uppercase tracking-widest font-semibold">
+                  ONLINE ZAKAZIVANJE
+                </span>
+                <h3 className="text-2xl font-display font-medium text-white mt-1">
+                  Prijem servisa bez čekanja
+                </h3>
+              </div>
+
+              {/* Authentic Car Box Facility Photo */}
+              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-950 border border-white/10 shadow-lg group">
+                <Image
+                  src="/images/unnamed.webp"
+                  alt="Car Box Servisni Centar Niš"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-white">
+                  <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 flex items-center space-x-1.5">
+                    <ShieldCheck className="w-3 h-3 text-[#c8102e]" />
+                    <span>ORIGINALNI DELOVI I DIJAGNOSTIKA</span>
+                  </span>
+                </div>
+              </div>
             </div>
 
             <div className="lg:col-span-7">

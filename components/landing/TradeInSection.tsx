@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { RevealText, RevealParagraph } from '@/components/ui/RevealText';
+import Image from 'next/image';
+import { RevealText } from '@/components/ui/RevealText';
 import { OdometerNumber } from '@/components/ui/OdometerNumber';
-import { RefreshCw, CheckCircle2, ShieldCheck, ArrowRight, Send } from 'lucide-react';
+import { ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 export function TradeInSection() {
   const [step, setStep] = useState(1);
@@ -31,37 +32,44 @@ export function TradeInSection() {
   })();
 
   return (
-    <section id="staro-za-novo" className="relative py-28 bg-[#08080a] border-t border-neutral-900">
+    <section id="staro-za-novo" className="relative py-24 sm:py-32 bg-[#08080a] border-t border-neutral-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Editorial Info */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* Left Column: Heading & Authentic Showroom Photo */}
           <div className="lg:col-span-5 space-y-6">
-            <RevealText delay={0.1}>
-              <div className="text-[11px] font-mono tracking-[0.2em] text-[#c8102e] uppercase font-semibold">
-                05 · PROGRAM ZAMENE VOZILA
-              </div>
-            </RevealText>
+            <div>
+              <RevealText delay={0.1}>
+                <div className="text-[11px] font-mono tracking-[0.2em] text-[#c8102e] uppercase font-semibold mb-2">
+                  05 · PROGRAM ZAMENE VOZILA
+                </div>
+              </RevealText>
 
-            <RevealText delay={0.2}>
-              <h2 className="text-3xl sm:text-5xl font-display font-medium text-white tracking-tight uppercase leading-[1.05]">
-                Staro <br />
-                <span className="editorial-italic font-normal text-white">za novo</span>.
-              </h2>
-            </RevealText>
+              <RevealText delay={0.2}>
+                <h2 className="text-3xl sm:text-5xl font-display font-medium text-white tracking-tight uppercase leading-[1.05]">
+                  Staro <br />
+                  <span className="editorial-italic font-normal text-white">za novo</span>.
+                </h2>
+              </RevealText>
+              <p className="mt-2 text-xs sm:text-sm text-neutral-400 font-light">
+                Transparentna procena i pisana garancija na kilometražu.
+              </p>
+            </div>
 
-            <RevealParagraph delay={0.3} className="text-sm sm:text-base text-neutral-400 font-light leading-relaxed">
-              Zamenite vaše vozilo uz transparentnu procenu. Sva naša polovna vozila kupljena su nova u Srbiji, poseduju proverenu servisnu istoriju i pisano garantovanu kilometražu.
-            </RevealParagraph>
-
-            <div className="space-y-3 pt-2">
-              <div className="p-4 rounded-2xl bg-neutral-950 border border-white/5 space-y-1">
-                <div className="text-xs font-mono font-bold text-white uppercase">110 Tačaka Kontrole</div>
-                <div className="text-[11px] text-neutral-400 font-light">Detaljna servisna dijagnostika pre uvrštavanja u ponudu.</div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-neutral-950 border border-white/5 space-y-1">
-                <div className="text-xs font-mono font-bold text-white uppercase">Poznata Servisna Istorija</div>
-                <div className="text-[11px] text-neutral-400 font-light">Vozila od prvog ili drugog vlasnika kupljena u Srbiji.</div>
+            {/* Authentic Showroom Photo */}
+            <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-950 border border-white/10 shadow-xl group">
+              <Image
+                src="/images/unnamed (9).webp"
+                alt="Car Box Prijem Vozila i Savetovanje Niš"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-white">
+                <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 flex items-center space-x-1.5">
+                  <ShieldCheck className="w-3 h-3 text-[#c8102e]" />
+                  <span>110 TAČAKA PROVERE U SALONU</span>
+                </span>
+                <span className="text-neutral-300">CAR BOX NIŠ</span>
               </div>
             </div>
           </div>

@@ -7,84 +7,92 @@ import { ShieldCheck, MapPin } from 'lucide-react';
 
 export function ManifestSection() {
   return (
-    <section className="relative py-24 sm:py-32 bg-[#08080a] border-y border-neutral-900 overflow-hidden">
+    <section className="relative py-20 sm:py-28 bg-[#08080a] border-y border-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Authentic Overhead Photo of Car Box Facility */}
-          <div className="lg:col-span-6 relative">
-            <div className="relative aspect-[16/11] sm:aspect-[4/3] rounded-3xl overflow-hidden bg-neutral-950 border border-white/10 shadow-2xl group">
-              <Image
-                src="/images/unnamed (8).webp"
-                alt="Car Box Showroom Floor Niš"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-transparent to-transparent opacity-70" />
+        {/* Top Minimal Editorial Header */}
+        <div className="max-w-3xl mb-12">
+          <RevealText delay={0.1}>
+            <div className="flex items-center space-x-2 text-[11px] font-mono tracking-[0.2em] text-[#c8102e] uppercase font-semibold mb-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#c8102e]" />
+              <span>CENTRALNI KOMPLEKS · NIŠ</span>
+            </div>
+          </RevealText>
 
-              <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-black/70 backdrop-blur-md border border-white/10 flex items-center justify-between">
-                <div>
-                  <div className="text-xs font-mono font-bold text-white uppercase tracking-wider">
-                    CENTRALNI SALON CAR BOX
-                  </div>
-                  <div className="text-[10px] text-neutral-400 font-mono">Bulevar cara Konstantina 80-82, Niš</div>
-                </div>
-                <div className="flex items-center space-x-1 text-[11px] font-mono text-emerald-400">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>4.500 m²</span>
-                </div>
-              </div>
+          <RevealText delay={0.2}>
+            <h2 className="text-3xl sm:text-6xl font-display font-medium text-white leading-[1.04] tracking-tight uppercase">
+              Više brendova. <br />
+              Jedna <span className="editorial-italic font-normal text-white">adresa</span>.
+            </h2>
+          </RevealText>
+          <p className="mt-3 text-xs sm:text-sm text-neutral-400 font-light max-w-xl">
+            Preko 4.500 m² namenskog prostora: ovlašćeni saloni za automobile, specijalizovano moto krilo i inženjerski servisni centar.
+          </p>
+        </div>
+
+        {/* Dual Expansive Photo Display */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-10">
+          {/* Main Showroom Floor Photo */}
+          <div className="lg:col-span-7 relative aspect-[16/10] rounded-3xl overflow-hidden bg-neutral-950 border border-white/10 shadow-2xl group">
+            <Image
+              src="/images/unnamed (8).webp"
+              alt="Centralni Salon Car Box Niš"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-[11px] font-mono">
+              <span className="px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/15">
+                IZLOŽBENI SALON · OPEL & SUZUKI
+              </span>
+              <span className="text-emerald-400 font-bold">4.500 m²</span>
             </div>
           </div>
 
-          {/* Right Column: Editorial Text & Numbers */}
-          <div className="lg:col-span-6 space-y-8">
-            <RevealText delay={0.1}>
-              <div className="flex items-center space-x-2 text-[11px] font-mono tracking-[0.2em] text-[#c8102e] uppercase font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c8102e]" />
-                <span>STANDARDI & INFRASTRUKTURA</span>
-              </div>
-            </RevealText>
+          {/* Exterior Facade Photo */}
+          <div className="lg:col-span-5 relative aspect-[16/10] lg:aspect-auto rounded-3xl overflow-hidden bg-neutral-950 border border-white/10 shadow-2xl group">
+            <Image
+              src="/images/unnamed (5).webp"
+              alt="Car Box Eksterijer i Brendovi"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-[11px] font-mono">
+              <span className="px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/15">
+                BULEVAR CARA KONSTANTINA
+              </span>
+              <span className="text-white font-bold">CAR BOX</span>
+            </div>
+          </div>
+        </div>
 
-            <RevealText delay={0.2}>
-              <h2 className="text-3xl sm:text-5xl font-display font-medium text-white leading-[1.08] tracking-tight uppercase">
-                Više brendova. <br />
-                Jedna <span className="editorial-italic font-normal text-white">adresa</span> u Nišu.
-              </h2>
-            </RevealText>
+        {/* Minimalist Metrics Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 sm:p-7 rounded-2xl bg-neutral-950 border border-white/5">
+          <div>
+            <OdometerNumber value={4500} suffix=" m²" className="text-2xl sm:text-3xl font-light text-white" />
+            <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider mt-1">
+              Kompleks Salona
+            </div>
+          </div>
 
-            <RevealParagraph delay={0.3} className="text-sm sm:text-base text-neutral-400 font-light leading-relaxed">
-              Kompleks Car Box prostire se na preko 4.500 m² namenskog prostora. Pod jednim krovom objedinjuje ovlašćene salone za putnička vozila, specijalizovano krilo za motocikle i kvadove, kao i visokotehnološki servis sa limarsko-farbarskom komorom.
-            </RevealParagraph>
+          <div>
+            <OdometerNumber value={8} className="text-2xl sm:text-3xl font-light text-[#c8102e]" />
+            <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider mt-1">
+              Svetskih Brendova
+            </div>
+          </div>
 
-            {/* Minimalist Metrics Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-neutral-850">
-              <div>
-                <OdometerNumber value={4500} suffix=" m²" className="text-2xl sm:text-3xl font-light text-white" />
-                <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider mt-1">
-                  Kompleksa
-                </div>
-              </div>
+          <div>
+            <OdometerNumber value={110} className="text-2xl sm:text-3xl font-light text-white" />
+            <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider mt-1">
+              Tačaka Provere
+            </div>
+          </div>
 
-              <div>
-                <OdometerNumber value={8} className="text-2xl sm:text-3xl font-light text-[#c8102e]" />
-                <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider mt-1">
-                  Svetskih Brendova
-                </div>
-              </div>
-
-              <div>
-                <OdometerNumber value={110} className="text-2xl sm:text-3xl font-light text-white" />
-                <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider mt-1">
-                  Tačaka Provere
-                </div>
-              </div>
-
-              <div>
-                <OdometerNumber value={100} suffix="%" className="text-2xl sm:text-3xl font-light text-[#c8102e]" />
-                <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider mt-1">
-                  Originalni Delovi
-                </div>
-              </div>
+          <div>
+            <OdometerNumber value={100} suffix="%" className="text-2xl sm:text-3xl font-light text-[#c8102e]" />
+            <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider mt-1">
+              Originalni Delovi
             </div>
           </div>
         </div>
