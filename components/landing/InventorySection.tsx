@@ -172,14 +172,13 @@ export function InventorySection({ onSelectVehicle, onOpenFinanceModal }: Props)
                     <div className="text-[10px] font-mono text-neutral-400">od {car.monthlyEstimateEur} € / mes.</div>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => onSelectVehicle?.(car)}
+                  <Link
+                    href={`/vozila/${car.id}`}
                     className="flex items-center space-x-1 px-4 py-2.5 rounded-xl bg-white hover:bg-neutral-200 text-black text-xs font-mono font-semibold uppercase tracking-wider transition-colors"
                   >
                     <span>Detalji</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </RevealCard>
