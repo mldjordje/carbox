@@ -134,14 +134,14 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
                 toneMapping: THREE.ACESFilmicToneMapping,
                 powerPreference: 'high-performance',
               }}
-              camera={{ position: [5.2, 1.7, 5.4], fov: 38, near: 0.1, far: 100 }}
+              camera={{ position: [4.7, 1.45, 4.5], fov: 36, near: 0.1, far: 100 }}
               onCreated={({ gl }) => {
-                gl.toneMappingExposure = 0.88;
+                gl.toneMappingExposure = 1.18;
               }}
               className="!absolute inset-0 cursor-grab active:cursor-grabbing"
             >
               <color attach="background" args={['#070709']} />
-              <fog attach="fog" args={['#070709', 10, 32]} />
+              <fog attach="fog" args={['#070709', 12, 36]} />
 
               <Suspense fallback={null}>
                 <HondaCivic
@@ -159,16 +159,16 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
 
               <CursorSpotlight />
 
-              {/* Stage Floor - Matte Obsidian Studio with Gentle Reflection */}
+              {/* Stage Floor - 100% Pure Matte Black Studio (Zero Glare / Zero Shiny Reflection) */}
               <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.001, 0]} receiveShadow>
-                <planeGeometry args={[70, 70]} />
-                <meshStandardMaterial color="#08080c" roughness={0.44} metalness={0.5} />
+                <planeGeometry args={[80, 80]} />
+                <meshStandardMaterial color="#050507" roughness={1.0} metalness={0.0} />
               </mesh>
 
               <OrbitControls
                 makeDefault
                 autoRotate={isRotating}
-                autoRotateSpeed={0.68}
+                autoRotateSpeed={0.52}
                 enablePan={false}
                 minPolarAngle={0.12}
                 maxPolarAngle={Math.PI / 2.05}
