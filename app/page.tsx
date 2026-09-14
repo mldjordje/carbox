@@ -6,6 +6,7 @@ import { Navbar } from '@/components/landing/Navbar';
 import { HeroSection } from '@/components/landing/HeroSection';
 import { ManifestSection } from '@/components/landing/ManifestSection';
 import { ThreeSection } from '@/components/landing/ThreeSection';
+import { ShowroomGallerySection } from '@/components/landing/ShowroomGallerySection';
 import { ReelsSection } from '@/components/landing/ReelsSection';
 import { BrandsSection } from '@/components/landing/BrandsSection';
 import { InventorySection } from '@/components/landing/InventorySection';
@@ -33,7 +34,7 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen bg-[#08080a] text-[#f2f0eb] selection:bg-[#c8102e] selection:text-white pb-16 lg:pb-0">
-      {/* Luxury Custom Cursor (Desktop only) */}
+      {/* Luxury Custom Magnetic Cursor (Desktop only) */}
       <CustomCursor />
 
       {/* Cinematic Luxury Preloader */}
@@ -45,7 +46,7 @@ export default function Home() {
       <Navbar
         onOpenTestDrive={() => handleOpenTestDrive()}
         onSelectBrand={(brandId) => {
-          const el = document.getElementById('lager');
+          const el = document.getElementById('brendovi');
           el?.scrollIntoView({ behavior: 'smooth' });
         }}
       />
@@ -59,7 +60,7 @@ export default function Home() {
         }}
       />
 
-      {/* S02: Silent Editorial Manifest */}
+      {/* S02: Silent Editorial Manifest with 4.500 m² Real Showroom Photo */}
       <ManifestSection />
 
       {/* S03: 3D Digital Showroom (Civic RS & CR-V 2026) with Pinned Hotspots & Camera Presets */}
@@ -67,10 +68,13 @@ export default function Home() {
         onOpenTestDrive={() => handleOpenTestDrive()}
       />
 
-      {/* S04: Instagram Reels & Showroom Live Atmosphere */}
+      {/* S04: NEW Authentic Showroom & Complex Master Gallery (Real Car Box Facility) */}
+      <ShowroomGallerySection />
+
+      {/* S05: Instagram Reels & Showroom Live Atmosphere */}
       <ReelsSection />
 
-      {/* S05: Brand Ecosystem & Story (Honda, Peugeot, Opel, Suzuki, Jetour, Vespa, Segway) */}
+      {/* S06: Brand Ecosystem & Story (Real Car Box Branded Showrooms) */}
       <BrandsSection
         onSelectBrand={(brandId) => {
           const el = document.getElementById('lager');
@@ -78,7 +82,7 @@ export default function Home() {
         }}
       />
 
-      {/* S06: Minimalist Inventory & Natural Language Search */}
+      {/* S07: Minimalist Inventory & Natural Language Search */}
       <InventorySection
         onSelectVehicle={(vehicle) => setSelectedVehicle(vehicle)}
         onOpenFinanceModal={(vehicle) => {
@@ -87,21 +91,21 @@ export default function Home() {
         }}
       />
 
-      {/* S07: "Staro za Novo" Certified Trade-In */}
+      {/* S08: "Staro za Novo" Certified Trade-In */}
       <TradeInSection />
 
-      {/* S08: Finance & Leasing Calculator */}
+      {/* S09: Finance & Leasing Calculator */}
       <FinanceCalculatorSection />
 
-      {/* S09: Moto & Powersports Hub */}
+      {/* S10: Moto & Powersports Hub */}
       <MotoATVSection
         onOpenTestRide={() => handleOpenTestDrive()}
       />
 
-      {/* S10: Service Center */}
+      {/* S11: Service Center */}
       <ServiceSection />
 
-      {/* S11: Location & Footer */}
+      {/* S12: Location, Authentic Exterior Building & Footer */}
       <ContactFooterSection />
 
       {/* Mobile-First Floating Thumb Bar */}

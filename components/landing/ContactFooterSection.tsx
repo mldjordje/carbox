@@ -1,71 +1,88 @@
 'use client';
 
-import { MapPin, Phone, Clock, ExternalLink } from 'lucide-react';
-import { RevealText } from '@/components/ui/RevealText';
+import Image from 'next/image';
+import { MapPin, Phone, Clock, ExternalLink, ShieldCheck } from 'lucide-react';
 
 export function ContactFooterSection() {
   return (
     <footer id="kontakt" className="relative pt-24 pb-16 bg-[#050507] border-t border-neutral-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Location Box */}
-        <div className="luxury-card rounded-3xl p-6 sm:p-12 mb-16 space-y-8">
+        {/* Main Location Box with Authentic Exterior Facility Image */}
+        <div className="luxury-card rounded-3xl p-6 sm:p-10 mb-16 space-y-8 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 space-y-4">
-              <div className="text-[11px] font-mono tracking-[0.2em] text-[#c8102e] uppercase font-semibold">
-                09 · SALON & SERVIS
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-display font-medium text-white tracking-tight uppercase">
-                Bulevar cara Konstantina <br className="hidden sm:block" />
-                <span className="editorial-italic font-normal text-white">80-82</span>, Niš
-              </h2>
-              <p className="text-sm text-neutral-400 font-light max-w-lg leading-relaxed">
-                Nalazimo se na glavnoj saobraćajnici sa namenskim parkingom za klijente, izložbenim salonom i prijemnim odeljenjem servisa.
-              </p>
+            {/* Left Facility Real Photo */}
+            <div className="lg:col-span-6 relative">
+              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-950 border border-white/10 shadow-xl group">
+                <Image
+                  src="/images/unnamed.webp"
+                  alt="Car Box Niš Eksterijer Salona"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-              <div className="pt-2 flex flex-wrap gap-4 text-xs font-mono text-neutral-400">
-                <div className="flex items-center space-x-1.5 text-white">
-                  <Clock className="w-3.5 h-3.5 text-[#c8102e]" />
-                  <span>Salon: Pon–Pet 08–18h | Sub 08–15h</span>
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-white">
+                  <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10">
+                    Bulevar cara Konstantina 80-82, Niš
+                  </span>
+                  <span className="text-emerald-400 font-bold">Otvoren Salon</span>
                 </div>
-                <span>·</span>
-                <span>Servis: Pon–Pet 08–16:30h</span>
               </div>
             </div>
 
-            <div className="lg:col-span-5 space-y-3 font-mono text-xs">
-              <a
-                href="https://maps.google.com/?q=Bulevar+cara+Konstantina+80-82+Nis"
-                target="_blank"
-                rel="noreferrer"
-                className="w-full flex items-center justify-between p-4 rounded-2xl bg-neutral-950 border border-white/10 hover:border-white/30 text-white transition-colors"
-              >
-                <div className="flex items-center space-x-2">
-                  <MapPin className="w-4 h-4 text-[#c8102e]" />
-                  <span>Otvori Google Maps Navigaciju</span>
+            {/* Right Contact Info */}
+            <div className="lg:col-span-6 space-y-5">
+              <div>
+                <div className="text-[11px] font-mono tracking-[0.2em] text-[#c8102e] uppercase font-semibold">
+                  09 · SALON & SERVISNI CENTAR
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 text-neutral-400" />
-              </a>
+                <h2 className="text-2xl sm:text-4xl font-display font-medium text-white tracking-tight uppercase mt-1">
+                  Posetite nas u Nišu.
+                </h2>
+                <p className="text-sm text-neutral-400 font-light leading-relaxed mt-2">
+                  Izložbeni salon novih i sertifikovanih polovnih vozila, ovlašćeno moto krilo i prijem servisa na jednom mestu sa prostranim klijentskim parkingom.
+                </p>
+              </div>
 
-              <a
-                href="tel:+38118550000"
-                className="w-full flex items-center justify-between p-4 rounded-2xl bg-neutral-950 border border-white/10 hover:border-white/30 text-white transition-colors"
-              >
-                <div className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4 text-[#c8102e]" />
-                  <span>Prodaja: 018 / 550 - 000</span>
+              {/* Contact Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+                <a
+                  href="tel:+38118550000"
+                  className="p-3.5 rounded-2xl bg-neutral-950 border border-white/10 hover:border-white/30 text-white transition-colors block"
+                >
+                  <div className="text-[10px] text-neutral-400 uppercase">PRODAJA VOZILA:</div>
+                  <div className="text-sm font-bold text-white mt-0.5">018 / 550 - 000</div>
+                  <div className="text-[10px] text-neutral-400">prodaja@carbox.rs</div>
+                </a>
+
+                <a
+                  href="tel:+38118550001"
+                  className="p-3.5 rounded-2xl bg-neutral-950 border border-white/10 hover:border-white/30 text-white transition-colors block"
+                >
+                  <div className="text-[10px] text-neutral-400 uppercase">PRIJEM SERVISA:</div>
+                  <div className="text-sm font-bold text-white mt-0.5">018 / 550 - 001</div>
+                  <div className="text-[10px] text-neutral-400">servis@carbox.rs</div>
+                </a>
+              </div>
+
+              {/* Working Hours & Map CTA */}
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-neutral-400 border-t border-neutral-850">
+                <div className="flex items-center space-x-1.5 text-white">
+                  <Clock className="w-3.5 h-3.5 text-[#c8102e]" />
+                  <span>Pon–Pet 08–18h | Sub 08–15h</span>
                 </div>
-                <span className="text-[10px] text-neutral-400">POZOVI</span>
-              </a>
 
-              <a
-                href="https://www.polovniautomobili.com/car-box"
-                target="_blank"
-                rel="noreferrer"
-                className="w-full flex items-center justify-between p-4 rounded-2xl bg-neutral-950 border border-white/10 hover:border-white/30 text-white transition-colors"
-              >
-                <span>Profil na Polovnim Automobilima</span>
-                <ExternalLink className="w-3.5 h-3.5 text-neutral-400" />
-              </a>
+                <a
+                  href="https://maps.google.com/?q=Bulevar+cara+Konstantina+80-82+Nis"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center space-x-1 text-white hover:text-[#c8102e] transition-colors"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-[#c8102e]" />
+                  <span>Google Maps Navigacija</span>
+                  <ExternalLink className="w-3 h-3 text-neutral-400" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
