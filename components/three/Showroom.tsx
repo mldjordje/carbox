@@ -8,49 +8,49 @@ import * as THREE from 'three';
 export function Showroom({ intensity = 1 }: { intensity?: number }) {
   return (
     <Environment resolution={1024} frames={1}>
-      {/* Overhead High-Gloss Studio Strip */}
+      {/* Overhead Diffuse Studio Softbox - Broad & Soft (Eliminates harsh white glare) */}
       <Lightformer
         form="rect"
-        intensity={3.8 * intensity}
-        position={[0, 7, 0]}
+        intensity={1.35 * intensity}
+        position={[0, 7.5, 0]}
         rotation={[Math.PI / 2, 0, 0]}
-        scale={[16, 2.8, 1]}
+        scale={[20, 6, 1]}
         color="#ffffff"
       />
-      {/* Flank Left Cool Rim Light */}
+      {/* Flank Left Cool Rim Light - Defines body curves & wheel arches */}
       <Lightformer
         form="rect"
-        intensity={2.0 * intensity}
-        position={[-8, 3.5, 0]}
+        intensity={0.85 * intensity}
+        position={[-9, 3, 0]}
         rotation={[0, Math.PI / 2, 0]}
-        scale={[16, 6, 1]}
-        color="#dbe4ff"
+        scale={[18, 5, 1]}
+        color="#d8e4f5"
       />
       {/* Flank Right Warm Accent Light */}
       <Lightformer
         form="rect"
-        intensity={1.8 * intensity}
-        position={[8, 3.5, 0]}
+        intensity={0.75 * intensity}
+        position={[9, 3, 0]}
         rotation={[0, -Math.PI / 2, 0]}
-        scale={[16, 6, 1]}
-        color="#fff1e0"
+        scale={[18, 5, 1]}
+        color="#fef3e2"
       />
-      {/* Front Soft Fill */}
+      {/* Front Soft Fascia & Grille Fill */}
       <Lightformer
         form="rect"
-        intensity={1.2 * intensity}
-        position={[0, 3, 10]}
+        intensity={0.55 * intensity}
+        position={[0, 2.5, 9]}
         rotation={[0, 0, 0]}
-        scale={[14, 5, 1]}
-        color="#e2e8f0"
+        scale={[12, 4, 1]}
+        color="#e5eaf2"
       />
-      {/* Rear Sill Crimson Glow (Car Box brand accent) */}
+      {/* Rear Sill Subtle Crimson Brand Accent */}
       <Lightformer
         form="rect"
-        intensity={1.2 * intensity}
-        position={[0, 0.5, -6]}
+        intensity={0.7 * intensity}
+        position={[0, 0.6, -6]}
         rotation={[0, Math.PI, 0]}
-        scale={[8, 0.8, 1]}
+        scale={[10, 0.8, 1]}
         color="#e60012"
       />
     </Environment>
@@ -69,16 +69,16 @@ export function CursorSpotlight({ enabled = true }: { enabled?: boolean }) {
     if (enabled) {
       const { x, y } = state.pointer;
       desired.current.set(
-        x * viewport.width * 0.7,
-        3.2 + y * 2.0,
-        3.0 + Math.abs(x) * 1.5,
+        x * viewport.width * 0.45,
+        3.5 + y * 1.2,
+        3.8 + Math.abs(x) * 1.0,
       );
     } else {
-      const t = state.clock.elapsedTime * 0.3;
-      desired.current.set(Math.sin(t) * 4, 3.5, Math.cos(t) * 4);
+      const t = state.clock.elapsedTime * 0.25;
+      desired.current.set(Math.sin(t) * 3.5, 3.5, Math.cos(t) * 3.5);
     }
 
-    const k = 1 - Math.pow(0.002, delta);
+    const k = 1 - Math.pow(0.003, delta);
     light.current.position.lerp(desired.current, k);
     light.current.target = target.current;
     light.current.target.updateMatrixWorld();
@@ -86,26 +86,29 @@ export function CursorSpotlight({ enabled = true }: { enabled?: boolean }) {
 
   return (
     <>
-      <primitive object={target.current} position={[0, 0.5, 0]} />
+      <primitive object={target.current} position={[0, 0.4, 0]} />
+      {/* Gentle studio key light with soft penumbra - zero blown out highlights */}
       <spotLight
         ref={light}
-        position={[0, 4.5, 4]}
-        angle={0.6}
-        penumbra={0.9}
-        intensity={160}
-        distance={24}
-        color="#fff8f0"
+        position={[0, 4.2, 4.5]}
+        angle={0.7}
+        penumbra={1.0}
+        intensity={8.5}
+        distance={22}
+        color="#faf7f2"
         castShadow
         shadow-mapSize={[1024, 1024]}
-        shadow-bias={-0.0005}
+        shadow-bias={-0.0004}
       />
-      <ambientLight intensity={0.12} />
+      {/* Balanced ambient fill light so shadows preserve body detail */}
+      <ambientLight intensity={0.38} />
+      {/* Grounding Contact Shadows */}
       <ContactShadows
         position={[0, 0, 0]}
-        opacity={0.88}
-        scale={16}
-        blur={2.2}
-        far={4.5}
+        opacity={0.82}
+        scale={18}
+        blur={2.0}
+        far={4}
         resolution={512}
         color="#000000"
       />

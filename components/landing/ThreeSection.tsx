@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, useState, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
@@ -10,7 +10,7 @@ import { Showroom, CursorSpotlight } from '@/components/three/Showroom';
 import { HONDA_PAINTS, type PaintId } from '@/lib/car-paint';
 import { RevealText, RevealParagraph, RevealCard } from '@/components/ui/RevealText';
 import { OdometerNumber } from '@/components/ui/OdometerNumber';
-import { RotateCw, Lightbulb, Calendar, Move, Sparkles } from 'lucide-react';
+import { RotateCw, Lightbulb, Calendar, Move, Sparkles, Play } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
   useGLTF.preload('/models/honda_civic_rs.glb');
@@ -25,7 +25,8 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
   const [activeModel, setActiveModel] = useState<'civic' | 'crv'>('civic');
   const [paint, setPaint] = useState<PaintId>('sonic_gray');
   const [lightsOn, setLightsOn] = useState(true);
-  const [isRotating, setIsRotating] = useState(false);
+  const [isRotating, setIsRotating] = useState(true);
+  const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const modelSpecs = {
     civic: {
@@ -150,28 +151,38 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
                   lightsOn={lightsOn}
                   visible={activeModel === 'crv'}
                 />
-                <Showroom intensity={1.15} />
+                <Showroom intensity={1.0} />
               </Suspense>
 
               <CursorSpotlight />
 
-              {/* Stage Floor */}
+              {/* Stage Floor - Matte Obsidian Studio with Gentle Reflection */}
               <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.001, 0]} receiveShadow>
                 <planeGeometry args={[70, 70]} />
-                <meshStandardMaterial color="#0b0b0f" roughness={0.34} metalness={0.65} />
+                <meshStandardMaterial color="#08080c" roughness={0.44} metalness={0.5} />
               </mesh>
 
               <OrbitControls
                 makeDefault
                 autoRotate={isRotating}
-                autoRotateSpeed={1.2}
+                autoRotateSpeed={0.68}
                 enablePan={false}
                 minPolarAngle={0.12}
                 maxPolarAngle={Math.PI / 2.05}
                 minDistance={3.2}
                 maxDistance={12}
                 enableDamping
-                dampingFactor={0.05}
+                dampingFactor={0.06}
+                onStart={() => {
+                  if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+                  setIsRotating(false);
+                }}
+                onEnd={() => {
+                  if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+                  resumeTimeoutRef.current = setTimeout(() => {
+                    setIsRotating(true);
+                  }, 2200);
+                }}
               />
             </Canvas>
 
@@ -183,17 +194,23 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
               </div>
             </div>
 
-            {/* Top Right Subtle Floating Controls */}
+            {/* Top Right Floating Controls - Cinematic Toggle & Lights */}
             <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex items-center space-x-2">
               <button
                 type="button"
-                onClick={() => setIsRotating(!isRotating)}
-                className={`p-2.5 rounded-full border text-xs font-mono transition-all backdrop-blur-md ${
-                  isRotating ? 'bg-white text-black border-white shadow-lg' : 'bg-black/60 border-white/15 text-neutral-300 hover:text-white'
+                onClick={() => {
+                  if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+                  setIsRotating(!isRotating);
+                }}
+                className={`px-3.5 py-2 rounded-full border text-[10px] font-mono uppercase tracking-wider flex items-center space-x-1.5 transition-all backdrop-blur-md ${
+                  isRotating
+                    ? 'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.3)] font-bold'
+                    : 'bg-black/60 border-white/15 text-neutral-300 hover:text-white'
                 }`}
-                title="Automatska rotacija"
+                title={isRotating ? 'Pauziraj cinematic rotaciju' : 'Pokreni cinematic rotaciju'}
               >
-                <RotateCw className={`w-3.5 h-3.5 ${isRotating ? 'animate-spin' : ''}`} />
+                <RotateCw className={`w-3 h-3 ${isRotating ? 'animate-spin' : ''}`} />
+                <span className="hidden xs:inline">{isRotating ? 'CINEMATIC 360°' : 'POKRENI 360°'}</span>
               </button>
 
               <button

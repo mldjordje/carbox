@@ -41,15 +41,17 @@ export function HondaCRV({ paint = 'crystal_black', lightsOn = true, visible = t
         child.material = paintMaterial;
       }
 
-      // Upgrade glass
+      // Upgrade glass - sleek tinted automotive privacy glass with balanced reflection
       if (matName.includes('glass') || matName.includes('window') || matName.includes('clear_parts_window')) {
         child.material = new THREE.MeshPhysicalMaterial({
-          color: new THREE.Color('#0a0d12'),
-          transmission: 0.92,
-          roughness: 0.04,
-          ior: 1.52,
+          color: new THREE.Color('#080a0e'),
+          transmission: 0.88,
+          roughness: 0.08,
+          ior: 1.5,
           transparent: true,
           opacity: 0.88,
+          envMapIntensity: 0.6,
+          reflectivity: 0.5,
         });
       }
 
@@ -64,7 +66,7 @@ export function HondaCRV({ paint = 'crystal_black', lightsOn = true, visible = t
           mat.emissive = matName.includes('rear') || matName.includes('red')
             ? new THREE.Color('#ff1a2b')
             : new THREE.Color('#d8ebff');
-          mat.emissiveIntensity = lightsOn ? 2.8 : 0;
+          mat.emissiveIntensity = lightsOn ? 1.6 : 0;
           emissiveMats.current.push(mat);
         }
       }

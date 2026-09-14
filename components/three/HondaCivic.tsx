@@ -41,15 +41,17 @@ export function HondaCivic({ paint = 'sonic_gray', lightsOn = true, visible = tr
         child.material = paintMaterial;
       }
 
-      // Upgrade glass
+      // Upgrade glass - sleek tinted automotive privacy glass with balanced reflection
       if (matName.includes('glass') || matName.includes('window')) {
         child.material = new THREE.MeshPhysicalMaterial({
-          color: new THREE.Color('#0a0d12'),
-          transmission: 0.9,
-          roughness: 0.05,
-          ior: 1.52,
+          color: new THREE.Color('#080a0e'),
+          transmission: 0.88,
+          roughness: 0.08,
+          ior: 1.5,
           transparent: true,
-          opacity: 0.85,
+          opacity: 0.88,
+          envMapIntensity: 0.6,
+          reflectivity: 0.5,
         });
       }
 
@@ -64,7 +66,7 @@ export function HondaCivic({ paint = 'sonic_gray', lightsOn = true, visible = tr
           mat.emissive = matName.includes('taillamp')
             ? new THREE.Color('#ff1a2b')
             : new THREE.Color('#d4e8ff');
-          mat.emissiveIntensity = lightsOn ? 2.5 : 0;
+          mat.emissiveIntensity = lightsOn ? 1.6 : 0;
           emissiveMats.current.push(mat);
         }
       }

@@ -2,6 +2,12 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useGLTF } from '@react-three/drei';
+
+if (typeof window !== 'undefined') {
+  useGLTF.preload('/models/honda_civic_rs.glb');
+  useGLTF.preload('/models/honda_cr-v_2026.glb');
+}
 
 interface Props {
   onComplete: () => void;

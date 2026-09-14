@@ -14,13 +14,13 @@ export type PaintId = (typeof HONDA_PAINTS)[number]['id'];
 export function createCarPaintMaterial(colorHex: string = HONDA_PAINTS[0].hex) {
   return new THREE.MeshPhysicalMaterial({
     color: new THREE.Color(colorHex),
-    metalness: 0.25,
-    roughness: 0.24,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.04,
-    envMapIntensity: 1.3,
-    ior: 1.52,
-    reflectivity: 0.9,
-    side: THREE.DoubleSide,
+    metalness: 0.62,
+    roughness: 0.32,
+    clearcoat: 0.75,
+    clearcoatRoughness: 0.16,
+    envMapIntensity: 0.85,
+    ior: 1.5,
+    reflectivity: 0.65,
+    side: THREE.FrontSide,
   });
 }
