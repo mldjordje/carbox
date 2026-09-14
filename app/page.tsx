@@ -9,6 +9,7 @@ import { ThreeSection } from '@/components/landing/ThreeSection';
 import { ShowroomGallerySection } from '@/components/landing/ShowroomGallerySection';
 import { ReelsSection } from '@/components/landing/ReelsSection';
 import { BrandsSection } from '@/components/landing/BrandsSection';
+import { NovaVozilaSection } from '@/components/landing/NovaVozilaSection';
 import { InventorySection } from '@/components/landing/InventorySection';
 import { TradeInSection } from '@/components/landing/TradeInSection';
 import { FinanceCalculatorSection } from '@/components/landing/FinanceCalculatorSection';
@@ -77,12 +78,17 @@ export default function Home() {
       {/* S06: Brand Ecosystem & Story (Real Car Box Branded Showrooms) */}
       <BrandsSection
         onSelectBrand={(brandId) => {
-          const el = document.getElementById('lager');
+          const el = document.getElementById('nova-vozila') || document.getElementById('lager');
           el?.scrollIntoView({ behavior: 'smooth' });
         }}
       />
 
-      {/* S07: Minimalist Inventory & Natural Language Search */}
+      {/* S07: Dedicated Authorized New Vehicles Showroom (0 km) */}
+      <NovaVozilaSection
+        onOpenTestDrive={(vehicle) => handleOpenTestDrive(vehicle)}
+      />
+
+      {/* S08: Minimalist Inventory & Natural Language Search */}
       <InventorySection
         onSelectVehicle={(vehicle) => setSelectedVehicle(vehicle)}
         onOpenFinanceModal={(vehicle) => {

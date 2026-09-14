@@ -48,6 +48,10 @@ export function Navbar({ onOpenTestDrive, onSelectBrand }: Props) {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-6 text-xs font-mono tracking-wider text-neutral-300">
+            <a href="#nova-vozila" className="hover:text-white transition-colors flex items-center space-x-1.5 text-white font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#e60012] animate-pulse" />
+              <span>NOVA VOZILA</span>
+            </a>
             <a href="#3d-showroom" className="hover:text-white transition-colors flex items-center space-x-1.5">
               <span className="w-1 h-1 rounded-full bg-[#c8102e]" />
               <span>3D STUDIO</span>
@@ -103,6 +107,14 @@ export function Navbar({ onOpenTestDrive, onSelectBrand }: Props) {
         {mobileMenuOpen && (
           <div className="lg:hidden mt-3 p-4 rounded-2xl bg-[#0e0e14] border border-white/10 shadow-2xl space-y-3 font-mono text-xs">
             <div className="grid grid-cols-2 gap-2">
+              <a
+                href="#nova-vozila"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-lg bg-neutral-900 border border-[#e60012]/30 text-white font-bold flex items-center space-x-1.5"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#e60012]" />
+                <span>Nova Vozila (0 km)</span>
+              </a>
               <a
                 href="#3d-showroom"
                 onClick={() => setMobileMenuOpen(false)}

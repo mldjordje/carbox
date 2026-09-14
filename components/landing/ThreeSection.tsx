@@ -135,6 +135,9 @@ export function ThreeSection({ onOpenTestDrive }: Props) {
                 powerPreference: 'high-performance',
               }}
               camera={{ position: [5.2, 1.7, 5.4], fov: 38, near: 0.1, far: 100 }}
+              onCreated={({ gl }) => {
+                gl.toneMappingExposure = 0.88;
+              }}
               className="!absolute inset-0 cursor-grab active:cursor-grabbing"
             >
               <color attach="background" args={['#070709']} />

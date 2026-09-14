@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { INVENTORY_VEHICLES, type Vehicle } from '@/lib/content/cars';
 import { pretraziVozila } from '@/lib/pretraga';
 import { RevealText, RevealParagraph, RevealCard } from '@/components/ui/RevealText';
