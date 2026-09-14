@@ -26,6 +26,192 @@ export interface Vehicle {
     trunk: string;
     warranty: string;
   };
+  equipment?: {
+    safety: string[];
+    interior: string[];
+    multimedia: string[];
+    exterior: string[];
+  };
+  colors?: { name: string; hex: string }[];
+  detailedSpecs?: {
+    engineType?: string;
+    torque?: string;
+    dimensions?: string;
+    curbWeight?: string;
+    fuelTankCapacity?: string;
+    batteryCapacity?: string;
+    emissions?: string;
+    serviceInterval?: string;
+  };
+}
+
+export interface VehicleEquipment {
+  safety: string[];
+  interior: string[];
+  multimedia: string[];
+  exterior: string[];
+}
+
+export interface VehicleColor {
+  name: string;
+  hex: string;
+}
+
+export const DEFAULT_CAR_COLORS: VehicleColor[] = [
+  { name: 'Sonic Grey Pearl', hex: '#545e65' },
+  { name: 'Platinum White Pearl', hex: '#f0f2f5' },
+  { name: 'Crystal Black Pearl', hex: '#111215' },
+  { name: 'Rallye Crimson Red', hex: '#c8102e' },
+  { name: 'Obsidian Grey Metallic', hex: '#2c2f33' },
+];
+
+export function getVehicleEquipment(vehicle: Vehicle): VehicleEquipment {
+  if (vehicle.equipment) return vehicle.equipment;
+
+  // Rich brand-tailored default equipment packages
+  if (vehicle.brand === 'Honda') {
+    return {
+      safety: [
+        'Honda SENSING napredni bezbednosni paket (ADAS Nivo 2)',
+        'CMBS sistem automatskog kočenja sa detekcijom pešaka i biciklista',
+        'LKAS sistem za održavanje vozila u sredini saobraćajne trake',
+        'ACC adaptivni tempomat sa funkcijom praćenja pri niskim brzinama (LSF)',
+        'BSI sistem za nadzor mrtvih uglova sa CTM upozorenjem na poprečni saobraćaj',
+        'TSR sistem za automatsko prepoznavanje saobraćajnih znakova',
+        '11 vazdušnih jastuka uključujući prednji centralni vazdušni jastuk',
+        'Automatska e-Call funkcija hitnog poziva u slučaju nezgode',
+      ],
+      interior: [
+        'Dvozonski automatski klima uređaj sa jonizatorom i plasmacluster tehnologijom',
+        'Sportska sedišta u kombinaciji prirodne kože i alkantare sa crvenim štepom',
+        'Grejanje prednjih sedišta i grejanje obruča upravljača',
+        'Elektropodesivo sedište vozača u 8 smerova sa memorijom',
+        'Ambijentalno LED osvetljenje enterijera u crvenoj boji (RS Edition)',
+        'Aluminijumske sportske pedale i pragovi sa osvetljenim logotipom',
+        'Honda Magic Seats preklopiva zadnja sedišta u bioskopskom stilu',
+      ],
+      multimedia: [
+        'Honda CONNECT sa 9-inčnim HD ekranom osetljivim na dodir i navigacijom',
+        'Bežično povezivanje za Apple CarPlay i Android Auto',
+        'Bose® Premium Audio sistem sa 12 zvučnika i centralnim sabvuferom',
+        'Digitalna TFT instrument tabla od 10.2 inča sa prikazom protoka hibridne energije',
+        'Bežični indukcioni punjač za mobilne telefone (15W Qi)',
+        '4 brza USB-C priključka napred i pozadi sa brzim punjenjem',
+      ],
+      exterior: [
+        'Full LED adaptivni farovi sa automatskim dugim svetlima i Matrix funkcijom',
+        '18-inčne RS aluminijumske felne u crnoj visokosjajnoj završnoj obradi',
+        'Panoramski krov sa električnim otvaranjem i integrisanom zavesom',
+        'Zatamnjena zadnja stakla sa UV i toplotnom zaštitom',
+        'Automatsko električno sklapanje retrovizora sa grejanjem i LED migavcima',
+        'Pametni ključ (Smart Entry & Start) sa senzorom dodira na kvakama',
+      ],
+    };
+  }
+
+  if (vehicle.brand === 'Peugeot') {
+    return {
+      safety: [
+        'Peugeot Drive Assist Plus (poluautonomna vožnja nivo 2)',
+        'Automatsko kočenje u slučaju opasnosti (Active Safety Brake) sa noćnim radarom',
+        'Aktivni sistem upozorenja na nenamerno napuštanje trake',
+        'Adaptivni tempomat sa Stop&Go funkcijom',
+        'Nadzor mrtvog ugla dugog dometa (do 75 metara)',
+        'VisioPark 360° sistem sa 4 HD kamere i panoramskim prikazom',
+        'LED Matrix tehnologija svetala koja sprečava zaslepljivanje drugih vozača',
+      ],
+      interior: [
+        'Peugeot Panoramic i-Cockpit® sa zakrivljenim HD ekranom od 21 inča',
+        'GT sportska sedišta sa AGR sertifikatom za ergonomiju i funkcijom masaže',
+        'Grejana prednja sedišta i grejani kompaktni sportski upravljač sa GT logoom',
+        'Trokraka ambijentalna LED rasveta u 8 personalizovanih boja',
+        'Automatski trozonski klima uređaj sa Clean Cabin sistemom filtera',
+        'Električna vrata prtljažnika sa hands-free otvaranjem pokretom noge',
+      ],
+      multimedia: [
+        'Peugeot i-Connect Advanced sa 3D povezivom TomTom navigacijom',
+        'Bežični Apple CarPlay i Android Auto sa ažuriranjem preko vazduha (OTA)',
+        'Focal® Premium Hi-Fi zvučni sistem sa 10 zvučnika snage 690W',
+        'i-Toggles: prilagodljive digitalne prečice osetljive na dodir',
+        'Bežično punjenje pametnih telefona (15W) i 4 USB-C priključka',
+      ],
+      exterior: [
+        'Peugeot Pixel LED prednja svetla u obliku tri lavlje kandže',
+        '19-inčne dvobojne dijamantski sečene aluminijumske felne',
+        'Crni krov Black Diamond u kontrastnoj boji (dvobojna karoserija)',
+        'Akustično laminirana prednja bočna stakla za maksimalnu zvučnu izolaciju',
+        'Električni preklopivi grejani retrovizori sa projekcijom lavljeg amblema',
+      ],
+    };
+  }
+
+  if (vehicle.brand === 'Suzuki') {
+    return {
+      safety: [
+        'Suzuki Safety Support napredni sistem asistencija',
+        'Dual Sensor Brake Support II (DSBS II) automatsko kočenje radarom i kamerom',
+        'Lane Departure Prevention sistem prevencije napuštanja trake',
+        'Adaptivni tempomat sa automatskim održavanjem distance',
+        'Blind Spot Monitor (BSM) upozorenje na vozila u mrtvom uglu',
+        'Rear Cross Traffic Alert upozorenje na nadolazeći saobraćaj unazad',
+        'Sistem prepoznavanja znakova ograničenja brzine i kamera za vožnju unazad',
+      ],
+      interior: [
+        'AllGrip selektor režima vožnje (Auto, Sport, Snow, Lock) na centralnoj konzoli',
+        'Kombinovana kožna sedišta sa grejanjem vozačkog i suvozačkog mesta',
+        'Automatski klima uređaj sa antialergijskim polen filterom',
+        'Multifunkcionalni kožni upravljač sa komandama za audio i tempomat',
+        'Dvostruki pod prtljažnika sa dodatnim skrivenim odeljkom za stvari',
+      ],
+      multimedia: [
+        '9-inčni HD multimedijalni ekran osetljiv na dodir sa prikazom hibridnog rada',
+        'Bežična podrška za pametne telefone putem Apple CarPlay i Android Auto',
+        'Suzuki Connect telemetrija i praćenje vozila putem mobilne aplikacije',
+        '4.2-inčni kolor LCD displej na instrument tabli sa AllGrip telemetrijom',
+        'Bluetooth handsfree povezivanje i USB priključak sa brzim punjenjem',
+      ],
+      exterior: [
+        'AllGrip 4x4 stalni inteligentni pogon na svim točkovima',
+        'Full LED prednja svetla sa integrisanim LED dnevnim svetlima',
+        '17-inčne polirane aluminijumske felne u dvobojnom finišu',
+        'Hromirani detalji maske hladnjaka i zaštitne plastike branika',
+        'Uzdužni krovni nosači u srebrnoj boji i tonirana stakla',
+      ],
+    };
+  }
+
+  // Generic / Moto / Other
+  return {
+    safety: [
+      'Napredni ABS sistem sa elektronskom raspodelom kočione sile (EBD)',
+      'Sistem elektronske kontrole stabilnosti (ESP / ESC)',
+      'Sistem kontrole proklizavanja (TCS / ASR)',
+      'Vazdušni jastuci za vozača i suvozača sa bočnim zavesama',
+      'LED dnevna i glavna svetla visokog intenziteta osvetljenja',
+    ],
+    interior: [
+      'Ergonomska premijum sedišta visokog komfora',
+      'Automatski klima uređaj sa digitalnim kontrolama',
+      'Kožni sportski upravljač podesiv po visini i dubini',
+      'Električni podizači stakala napred i pozadi',
+    ],
+    multimedia: [
+      'Multimedijalni kolor ekran osetljiv na dodir',
+      'Integracija pametnih telefona (Apple CarPlay & Android Auto)',
+      'Bluetooth handsfree telefoniranje i audio striming',
+      'USB priključci za punjenje prenosivih uređaja',
+    ],
+    exterior: [
+      'Originalne aluminijumske felne sa sigurnosnim šrafovima',
+      'Električno podesivi i grejani spoljni retrovizori',
+      'Fabrički zatamnjena stakla sa UV filterom',
+      'Metalik premijum lak karoserije visokog sjaja',
+    ],
+  };
+}
+
+export function getVehicleById(id: string): Vehicle | undefined {
+  return INVENTORY_VEHICLES.find((v) => v.id === id);
 }
 
 export const INVENTORY_VEHICLES: Vehicle[] = [
