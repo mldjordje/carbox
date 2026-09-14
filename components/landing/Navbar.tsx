@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Phone, Calendar, Sparkles, MapPin, Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { Phone, Calendar, Sparkles, MapPin, Menu, X, FileText } from 'lucide-react';
 
 interface Props {
   onOpenTestDrive?: () => void;
@@ -60,9 +61,15 @@ export function Navbar({ onOpenTestDrive, onSelectBrand }: Props) {
             <a href="#lager" className="hover:text-white transition-colors">LAGER</a>
             <a href="#staro-za-novo" className="hover:text-white transition-colors">STARO ZA NOVO</a>
             <a href="#moto-atv" className="hover:text-white transition-colors">MOTO & ATV</a>
-            <a href="#finansiranje" className="hover:text-white transition-colors">FINANSIJE</a>
             <a href="#servis" className="hover:text-white transition-colors">SERVIS</a>
             <a href="#kontakt" className="hover:text-white transition-colors">KONTAKT</a>
+            <Link
+              href="/projekat"
+              className="px-2.5 py-1 rounded-md border border-[#c8102e]/60 bg-[#c8102e]/15 text-white hover:bg-[#c8102e] text-[11px] font-bold tracking-widest flex items-center space-x-1.5 transition-all shadow-[0_0_12px_rgba(200,16,46,0.3)]"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#c8102e] animate-pulse" />
+              <span>PROJEKAT</span>
+            </Link>
           </nav>
 
           {/* Right Action Trigger */}
@@ -157,6 +164,14 @@ export function Navbar({ onOpenTestDrive, onSelectBrand }: Props) {
               >
                 Servis
               </a>
+              <Link
+                href="/projekat"
+                onClick={() => setMobileMenuOpen(false)}
+                className="col-span-2 p-3 rounded-xl bg-[#c8102e]/20 border border-[#c8102e]/60 text-white font-bold flex items-center justify-center space-x-2 shadow-[0_0_15px_rgba(200,16,46,0.25)]"
+              >
+                <span className="w-2 h-2 rounded-full bg-[#c8102e] animate-pulse" />
+                <span>STRATEŠKI PLAN & PONUDA (/projekat)</span>
+              </Link>
             </div>
 
             <button

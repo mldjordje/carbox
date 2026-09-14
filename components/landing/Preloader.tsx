@@ -33,6 +33,21 @@ export function Preloader({ onComplete }: Props) {
   const [statusMessage, setStatusMessage] = useState('INICIJALIZACIJA SISTEMA...');
   const targetProgress = useRef(0);
 
+  const handleSkip = () => {
+    setIsFinished(true);
+    setTimeout(onComplete, 200);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === ' ') {
+        handleSkip();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   useEffect(() => {
     let isCancelled = false;
     let loadedCount = 0;
@@ -157,8 +172,19 @@ export function Preloader({ onComplete }: Props) {
               <span className="w-1.5 h-1.5 rounded-full bg-[#c8102e] animate-pulse" />
               <span>CAR BOX NIŠ</span>
             </div>
-            <div className="text-[10px] font-mono text-neutral-500 tracking-widest uppercase hidden sm:block">
-              BULEVAR CARA KONSTANTINA 80-82 · 4.500 m²
+            <div className="flex items-center space-x-3">
+              <div className="text-[10px] font-mono text-neutral-500 tracking-widest uppercase hidden sm:block">
+                BULEVAR CARA KONSTANTINA 80-82 · 4.500 m²
+              </div>
+              <button
+                type="button"
+                onClick={handleSkip}
+                className="text-[11px] font-mono tracking-wider px-3 py-1 rounded-full border border-white/20 text-neutral-300 hover:text-white hover:border-[#c8102e] bg-white/5 backdrop-blur transition-all flex items-center space-x-1 cursor-pointer"
+              >
+                <span>Preskoči uvod</span>
+                <span className="text-[9px] text-neutral-400 hidden sm:inline">[Esc]</span>
+                <span>→</span>
+              </button>
             </div>
           </div>
 

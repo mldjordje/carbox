@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { MapPin, Phone, Clock, ExternalLink, ShieldCheck } from 'lucide-react';
 import { RevealText, RevealParagraph, RevealCard } from '@/components/ui/RevealText';
 
@@ -99,8 +100,17 @@ export function ContactFooterSection() {
           <div>
             CAR BOX NIŠ · OVLAŠĆENI ZASTUPNIK ZA JUGOISTOČNU SRBIJU
           </div>
-          <div>
-            Sva prava zadržana © {new Date().getFullYear()} Car Box d.o.o.
+          <div className="flex items-center space-x-6">
+            <Link
+              href="/projekat"
+              className="text-[#ff4d5a] hover:text-white transition-colors flex items-center space-x-1.5 font-bold"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#c8102e] animate-pulse" />
+              <span>STRATEŠKI PLAN PROJEKTA (/projekat)</span>
+            </Link>
+            <span>
+              Sva prava zadržana © {new Date().getFullYear()} Car Box d.o.o.
+            </span>
           </div>
         </div>
       </div>
