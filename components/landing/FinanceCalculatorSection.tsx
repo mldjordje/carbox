@@ -142,11 +142,11 @@ export function FinanceCalculatorSection() {
               <FileText className="w-4 h-4 text-[#c8102e]" />
               <span>Zatraži Zvaničnu Bankarsku Ponudu</span>
             </a>
-            </div>
-          </RevealCard>
-        </div>
+          </div>
+        </RevealCard>
       </div>
     </div>
-  </section>
-);
+  </div>
+</section>
+  );
 }
