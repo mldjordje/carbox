@@ -15,6 +15,7 @@ import { MotoATVSection } from '@/components/landing/MotoATVSection';
 import { ServiceSection } from '@/components/landing/ServiceSection';
 import { ContactFooterSection } from '@/components/landing/ContactFooterSection';
 import { MobileBottomBar } from '@/components/ui/MobileBottomBar';
+import { CustomCursor } from '@/components/ui/CustomCursor';
 import { VehicleModal } from '@/components/ui/VehicleModal';
 import { TestDriveModal } from '@/components/ui/TestDriveModal';
 import { Vehicle } from '@/lib/content/cars';
@@ -32,6 +33,9 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen bg-[#08080a] text-[#f2f0eb] selection:bg-[#c8102e] selection:text-white pb-16 lg:pb-0">
+      {/* Luxury Custom Cursor (Desktop only) */}
+      <CustomCursor />
+
       {/* Cinematic Luxury Preloader */}
       {!preloaderComplete && (
         <Preloader onComplete={() => setPreloaderComplete(true)} />
@@ -58,7 +62,7 @@ export default function Home() {
       {/* S02: Silent Editorial Manifest */}
       <ManifestSection />
 
-      {/* S03: 3D Digital Showroom (Civic RS & CR-V 2026) */}
+      {/* S03: 3D Digital Showroom (Civic RS & CR-V 2026) with Pinned Hotspots & Camera Presets */}
       <ThreeSection
         onOpenTestDrive={() => handleOpenTestDrive()}
       />
@@ -66,7 +70,7 @@ export default function Home() {
       {/* S04: Instagram Reels & Showroom Live Atmosphere */}
       <ReelsSection />
 
-      {/* S05: Brand Ecosystem & Story */}
+      {/* S05: Brand Ecosystem & Story (Honda, Peugeot, Opel, Suzuki, Jetour, Vespa, Segway) */}
       <BrandsSection
         onSelectBrand={(brandId) => {
           const el = document.getElementById('lager');
@@ -89,7 +93,7 @@ export default function Home() {
       {/* S08: Finance & Leasing Calculator */}
       <FinanceCalculatorSection />
 
-      {/* S09: Moto & Powersports */}
+      {/* S09: Moto & Powersports Hub */}
       <MotoATVSection
         onOpenTestRide={() => handleOpenTestDrive()}
       />
