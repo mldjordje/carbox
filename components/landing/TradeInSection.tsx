@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { RevealText } from '@/components/ui/RevealText';
+import { RevealText, RevealParagraph, RevealCard } from '@/components/ui/RevealText';
 import { OdometerNumber } from '@/components/ui/OdometerNumber';
 import { ShieldCheck, CheckCircle2 } from 'lucide-react';
 
@@ -50,39 +50,42 @@ export function TradeInSection() {
                   <span className="editorial-italic font-normal text-white">za novo</span>.
                 </h2>
               </RevealText>
-              <p className="mt-2 text-xs sm:text-sm text-neutral-400 font-light">
+              <RevealParagraph delay={0.3} className="mt-2 text-xs sm:text-sm text-neutral-400 font-light">
                 Transparentna procena i pisana garancija na kilometražu.
-              </p>
+              </RevealParagraph>
             </div>
 
             {/* Authentic Showroom Photo */}
-            <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-950 border border-white/10 shadow-xl group">
-              <Image
-                src="/images/unnamed (9).webp"
-                alt="Car Box Prijem Vozila i Savetovanje Niš"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-white">
-                <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 flex items-center space-x-1.5">
-                  <ShieldCheck className="w-3 h-3 text-[#c8102e]" />
-                  <span>110 TAČAKA PROVERE U SALONU</span>
-                </span>
-                <span className="text-neutral-300">CAR BOX NIŠ</span>
+            <RevealCard delay={0.25}>
+              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-950 border border-white/10 shadow-xl group">
+                <Image
+                  src="/images/unnamed (9).webp"
+                  alt="Car Box Prijem Vozila i Savetovanje Niš"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-white">
+                  <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 flex items-center space-x-1.5">
+                    <ShieldCheck className="w-3 h-3 text-[#c8102e]" />
+                    <span>110 TAČAKA PROVERE U SALONU</span>
+                  </span>
+                  <span className="text-neutral-300">CAR BOX NIŠ</span>
+                </div>
               </div>
-            </div>
+            </RevealCard>
           </div>
 
           {/* Right Appraisal Form */}
           <div className="lg:col-span-7">
-            <div className="luxury-card rounded-3xl p-6 sm:p-8 space-y-6">
-              <div className="flex items-center justify-between border-b border-neutral-850 pb-4">
-                <div className="text-xs font-mono text-neutral-400">
-                  KORAK <strong className="text-white">0{step}</strong> / 02
-                </div>
-                <div className="text-right">
-                  <div className="text-[9px] font-mono text-neutral-400 uppercase">OKVIRNA VREDNOST:</div>
+            <RevealCard delay={0.2}>
+              <div className="luxury-card rounded-3xl p-6 sm:p-8 space-y-6">
+                <div className="flex items-center justify-between border-b border-neutral-850 pb-4">
+                  <div className="text-xs font-mono text-neutral-400">
+                    KORAK <strong className="text-white">0{step}</strong> / 02
+                  </div>
+                  <div className="text-right">
+                    <div className="text-[9px] font-mono text-neutral-400 uppercase">OKVIRNA VREDNOST:</div>
                   <OdometerNumber value={estimatedValue} prefix="~ " suffix=" €" className="text-base font-bold text-white" />
                 </div>
               </div>
@@ -213,6 +216,7 @@ export function TradeInSection() {
                 </div>
               )}
             </div>
+            </RevealCard>
           </div>
         </div>
       </div>

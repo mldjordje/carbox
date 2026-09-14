@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { INVENTORY_VEHICLES, type Vehicle } from '@/lib/content/cars';
 import { pretraziVozila } from '@/lib/pretraga';
-import { RevealText, RevealParagraph } from '@/components/ui/RevealText';
+import { RevealText, RevealParagraph, RevealCard } from '@/components/ui/RevealText';
 import { OdometerNumber } from '@/components/ui/OdometerNumber';
 import { Search, Fuel, Gauge, Zap, ArrowUpRight, Calculator, Sparkles } from 'lucide-react';
 
@@ -56,129 +56,132 @@ export function InventorySection({ onSelectVehicle, onOpenFinanceModal }: Props)
         </div>
 
         {/* Minimalist Search Bar */}
-        <div className="luxury-card rounded-2xl p-4 sm:p-5 mb-8 space-y-3">
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Pretraga lagera (npr: 'hibrid do 40k', 'suv', 'skuter', 'polovno')..."
-              className="w-full pl-11 pr-4 py-3 rounded-xl bg-neutral-950 border border-white/10 text-white placeholder-neutral-500 text-xs sm:text-sm focus:outline-none focus:border-[#c8102e]"
-            />
-          </div>
-
-          {/* NLP Explanation */}
-          {searchQuery && searchResult.objasnjenje.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-neutral-850 text-xs font-mono">
-              <span className="text-neutral-400">Prepoznato:</span>
-              {searchResult.objasnjenje.map((e, idx) => (
-                <span key={idx} className="px-2.5 py-0.5 rounded bg-neutral-900 border border-white/10 text-white text-[11px]">
-                  {e}
-                </span>
-              ))}
+        <RevealCard delay={0.2}>
+          <div className="luxury-card rounded-2xl p-4 sm:p-5 mb-8 space-y-3">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Pretraga lagera (npr: 'hibrid do 40k', 'suv', 'skuter', 'polovno')..."
+                className="w-full pl-11 pr-4 py-3 rounded-xl bg-neutral-950 border border-white/10 text-white placeholder-neutral-500 text-xs sm:text-sm focus:outline-none focus:border-[#c8102e]"
+              />
             </div>
-          )}
-        </div>
+
+            {/* NLP Explanation */}
+            {searchQuery && searchResult.objasnjenje.length > 0 && (
+              <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-neutral-850 text-xs font-mono">
+                <span className="text-neutral-400">Prepoznato:</span>
+                {searchResult.objasnjenje.map((e, idx) => (
+                  <span key={idx} className="px-2.5 py-0.5 rounded bg-neutral-900 border border-white/10 text-white text-[11px]">
+                    {e}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </RevealCard>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap items-center gap-2 mb-8 text-xs font-mono">
-          {[
-            { id: 'all', label: 'SVA VOZILA' },
-            { id: 'novo', label: 'NOVA (0 KM)' },
-            { id: 'polovno', label: 'STARO ZA NOVO (POLOVNA)' },
-            { id: 'moto', label: 'MOTO & SKUTERI' },
-            { id: 'atv', label: 'ATV / KVADOVI' },
-          ].map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 py-2 rounded-xl transition-all ${
-                selectedCategory === cat.id
-                  ? 'bg-white text-black font-bold shadow-md'
-                  : 'bg-neutral-950 border border-white/5 text-neutral-400 hover:text-white'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
+        <RevealCard delay={0.25}>
+          <div className="flex flex-wrap items-center gap-2 mb-8 text-xs font-mono">
+            {[
+              { id: 'all', label: 'SVA VOZILA' },
+              { id: 'novo', label: 'NOVA (0 KM)' },
+              { id: 'polovno', label: 'STARO ZA NOVO (POLOVNA)' },
+              { id: 'moto', label: 'MOTO & SKUTERI' },
+              { id: 'atv', label: 'ATV / KVADOVI' },
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`px-4 py-2 rounded-xl transition-all ${
+                  selectedCategory === cat.id
+                    ? 'bg-white text-black font-bold shadow-md'
+                    : 'bg-neutral-950 border border-white/5 text-neutral-400 hover:text-white'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+        </RevealCard>
 
         {/* Vehicles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedVehicles.map((car) => (
-            <div
-              key={car.id}
-              className="luxury-card rounded-3xl overflow-hidden flex flex-col justify-between group"
-            >
-              <div>
-                {/* Image */}
-                <div className="relative aspect-[16/10] bg-neutral-950 overflow-hidden border-b border-white/5">
-                  <Image
-                    src={car.image}
-                    alt={car.model}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  
-                  {/* Badge */}
-                  <div className="absolute top-3 left-3 flex gap-2">
-                    <span className="text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/80 text-white border border-white/10 font-semibold">
-                      {car.badge || car.brand}
-                    </span>
-                    {car.has3D && (
-                      <span className="text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-[#c8102e] text-white flex items-center space-x-1 font-semibold">
-                        <Sparkles className="w-2.5 h-2.5" />
-                        <span>3D</span>
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Specs & Title */}
-                <div className="p-5 space-y-3">
-                  <div>
-                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#c8102e] font-semibold">{car.brand}</div>
-                    <h3 className="text-lg font-display font-medium text-white tracking-tight">
-                      {car.model}
-                    </h3>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2 text-[10px] font-mono text-neutral-400 border-y border-neutral-850 py-2.5">
-                    <div>
-                      <div className="text-white font-bold">{car.powerHp} KS</div>
-                      <div className="text-neutral-500">Snaga</div>
-                    </div>
-                    <div>
-                      <div className="text-white font-bold truncate">{car.fuel.split(' ')[0]}</div>
-                      <div className="text-neutral-500">Gorivo</div>
-                    </div>
-                    <div>
-                      <div className="text-white font-bold truncate">{car.transmission.split(' ')[0]}</div>
-                      <div className="text-neutral-500">Menjač</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Price & CTA */}
-              <div className="p-6 pt-0 flex items-center justify-between">
+          {displayedVehicles.map((car, idx) => (
+            <RevealCard key={car.id} delay={0.08 + (idx % 3) * 0.08}>
+              <div className="luxury-card rounded-3xl overflow-hidden flex flex-col justify-between group h-full">
                 <div>
-                  <OdometerNumber value={car.priceEur} suffix=" €" className="text-xl font-bold text-white font-mono" />
-                  <div className="text-[10px] font-mono text-neutral-400">od {car.monthlyEstimateEur} € / mes.</div>
+                  {/* Image */}
+                  <div className="relative aspect-[16/10] bg-neutral-950 overflow-hidden border-b border-white/5">
+                    <Image
+                      src={car.image}
+                      alt={car.model}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    
+                    {/* Badge */}
+                    <div className="absolute top-3 left-3 flex gap-2">
+                      <span className="text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/80 text-white border border-white/10 font-semibold">
+                        {car.badge || car.brand}
+                      </span>
+                      {car.has3D && (
+                        <span className="text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-[#c8102e] text-white flex items-center space-x-1 font-semibold">
+                          <Sparkles className="w-2.5 h-2.5" />
+                          <span>3D</span>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Specs & Title */}
+                  <div className="p-5 space-y-3">
+                    <div>
+                      <div className="text-[10px] font-mono uppercase tracking-wider text-[#c8102e] font-semibold">{car.brand}</div>
+                      <h3 className="text-lg font-display font-medium text-white tracking-tight">
+                        {car.model}
+                      </h3>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 text-[10px] font-mono text-neutral-400 border-y border-neutral-850 py-2.5">
+                      <div>
+                        <div className="text-white font-bold">{car.powerHp} KS</div>
+                        <div className="text-neutral-500">Snaga</div>
+                      </div>
+                      <div>
+                        <div className="text-white font-bold truncate">{car.fuel.split(' ')[0]}</div>
+                        <div className="text-neutral-500">Gorivo</div>
+                      </div>
+                      <div>
+                        <div className="text-white font-bold truncate">{car.transmission.split(' ')[0]}</div>
+                        <div className="text-neutral-500">Menjač</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => onSelectVehicle?.(car)}
-                  className="flex items-center space-x-1 px-4 py-2.5 rounded-xl bg-white hover:bg-neutral-200 text-black text-xs font-mono font-semibold uppercase tracking-wider transition-colors"
-                >
-                  <span>Detalji</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </button>
+                {/* Price & CTA */}
+                <div className="p-6 pt-0 flex items-center justify-between">
+                  <div>
+                    <OdometerNumber value={car.priceEur} suffix=" €" className="text-xl font-bold text-white font-mono" />
+                    <div className="text-[10px] font-mono text-neutral-400">od {car.monthlyEstimateEur} € / mes.</div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => onSelectVehicle?.(car)}
+                    className="flex items-center space-x-1 px-4 py-2.5 rounded-xl bg-white hover:bg-neutral-200 text-black text-xs font-mono font-semibold uppercase tracking-wider transition-colors"
+                  >
+                    <span>Detalji</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
-            </div>
+            </RevealCard>
           ))}
         </div>
       </div>

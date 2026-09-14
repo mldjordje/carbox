@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { RevealText, RevealParagraph } from '@/components/ui/RevealText';
+import { RevealText, RevealParagraph, RevealCard } from '@/components/ui/RevealText';
 import { Play, ExternalLink, Heart, MessageCircle } from 'lucide-react';
 
 function InstagramIcon({ className = 'w-4 h-4' }: { className?: string }) {
@@ -83,87 +83,90 @@ export function ReelsSection() {
         </div>
 
         {/* Instagram Stories Highlights Bar */}
-        <div className="mb-10 p-4 rounded-2xl bg-neutral-950/80 border border-white/5">
-          <div className="flex items-center justify-between text-[10px] font-mono text-neutral-400 uppercase tracking-widest mb-3">
-            <span>PRIČE SA SALONA (@CARBOX_NIS):</span>
-            <span className="hidden sm:inline">PREVUCI ZA SVE BRENDOVE →</span>
-          </div>
+        <RevealCard delay={0.2}>
+          <div className="mb-10 p-4 rounded-2xl bg-neutral-950/80 border border-white/5">
+            <div className="flex items-center justify-between text-[10px] font-mono text-neutral-400 uppercase tracking-widest mb-3">
+              <span>PRIČE SA SALONA (@CARBOX_NIS):</span>
+              <span className="hidden sm:inline">PREVUCI ZA SVE BRENDOVE →</span>
+            </div>
 
-          <div className="flex items-center space-x-4 overflow-x-auto pb-1 scrollbar-none">
-            {[
-              { id: 'honda', name: 'Honda', badge: 'e:HEV' },
-              { id: 'peugeot', name: 'Peugeot', badge: 'GT' },
-              { id: 'opel', name: 'Opel', badge: 'GS' },
-              { id: 'suzuki', name: 'Suzuki', badge: '4x4' },
-              { id: 'jetour', name: 'JETOUR', badge: 'SUV' },
-              { id: 'honda-moto', name: 'Honda Moto', badge: 'Moto' },
-              { id: 'piaggio-vespa', name: 'Vespa', badge: 'Skuter' },
-              { id: 'aprilia', name: 'Aprilia', badge: 'Sport' },
-              { id: 'segway-atv', name: 'Segway', badge: 'ATV' },
-              { id: 'zontes', name: 'Zontes', badge: 'Moto' },
-              { id: 'voge', name: 'Voge', badge: 'Moto' },
-            ].map((b) => (
-              <a
-                key={b.id}
-                href="#brendovi"
-                className="flex flex-col items-center space-y-1.5 shrink-0 group focus:outline-none"
-              >
-                <div className="w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-[#c8102e] via-amber-500 to-[#e60012] group-hover:scale-110 transition-transform shadow-md">
-                  <div className="w-full h-full rounded-full bg-[#0e0e14] flex items-center justify-center p-1 border border-black text-white font-mono text-[9px] font-bold text-center">
-                    {b.name.split(' ')[0]}
+            <div className="flex items-center space-x-4 overflow-x-auto pb-1 scrollbar-none">
+              {[
+                { id: 'honda', name: 'Honda', badge: 'e:HEV' },
+                { id: 'peugeot', name: 'Peugeot', badge: 'GT' },
+                { id: 'opel', name: 'Opel', badge: 'GS' },
+                { id: 'suzuki', name: 'Suzuki', badge: '4x4' },
+                { id: 'jetour', name: 'JETOUR', badge: 'SUV' },
+                { id: 'honda-moto', name: 'Honda Moto', badge: 'Moto' },
+                { id: 'piaggio-vespa', name: 'Vespa', badge: 'Skuter' },
+                { id: 'aprilia', name: 'Aprilia', badge: 'Sport' },
+                { id: 'segway-atv', name: 'Segway', badge: 'ATV' },
+                { id: 'zontes', name: 'Zontes', badge: 'Moto' },
+                { id: 'voge', name: 'Voge', badge: 'Moto' },
+              ].map((b) => (
+                <a
+                  key={b.id}
+                  href="#brendovi"
+                  className="flex flex-col items-center space-y-1.5 shrink-0 group focus:outline-none"
+                >
+                  <div className="w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-[#c8102e] via-amber-500 to-[#e60012] group-hover:scale-110 transition-transform shadow-md">
+                    <div className="w-full h-full rounded-full bg-[#0e0e14] flex items-center justify-center p-1 border border-black text-white font-mono text-[9px] font-bold text-center">
+                      {b.name.split(' ')[0]}
+                    </div>
                   </div>
-                </div>
-                <span className="text-[10px] font-mono text-neutral-400 group-hover:text-white transition-colors truncate max-w-[60px]">
-                  {b.name}
-                </span>
-              </a>
-            ))}
+                  <span className="text-[10px] font-mono text-neutral-400 group-hover:text-white transition-colors truncate max-w-[60px]">
+                    {b.name}
+                  </span>
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
+        </RevealCard>
 
         {/* Reels Vertical Cards Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {reels.map((r) => (
-            <a
-              key={r.id}
-              href="https://www.instagram.com/carbox_nis/reels/?hl=en"
-              target="_blank"
-              rel="noreferrer"
-              className="relative aspect-[9/16] rounded-3xl overflow-hidden bg-neutral-950 border border-white/10 group shadow-2xl flex flex-col justify-between p-4"
-            >
-              <Image
-                src={r.image}
-                alt={r.title}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/50 opacity-90 group-hover:opacity-80 transition-opacity" />
+          {reels.map((r, idx) => (
+            <RevealCard key={r.id} delay={0.1 + idx * 0.08}>
+              <a
+                href="https://www.instagram.com/carbox_nis/reels/?hl=en"
+                target="_blank"
+                rel="noreferrer"
+                className="relative aspect-[9/16] rounded-3xl overflow-hidden bg-neutral-950 border border-white/10 group shadow-2xl flex flex-col justify-between p-4 block h-full"
+              >
+                <Image
+                  src={r.image}
+                  alt={r.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/50 opacity-90 group-hover:opacity-80 transition-opacity" />
 
-              {/* Top Meta */}
-              <div className="relative z-10 flex items-center justify-between">
-                <span className="text-[10px] font-mono font-bold text-white px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10">
-                  {r.tag}
-                </span>
-                <div className="w-7 h-7 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:scale-110 transition-transform">
-                  <Play className="w-3.5 h-3.5 fill-white text-white translate-x-0.5" />
-                </div>
-              </div>
-
-              {/* Bottom Meta */}
-              <div className="relative z-10 space-y-2">
-                <h3 className="text-xs sm:text-sm font-display font-medium text-white line-clamp-2">
-                  {r.title}
-                </h3>
-                <div className="flex items-center space-x-3 text-[10px] font-mono text-neutral-300 pt-1 border-t border-white/10">
-                  <span className="flex items-center space-x-1">
-                    <Heart className="w-3 h-3 text-[#c8102e]" />
-                    <span>{r.likes}</span>
+                {/* Top Meta */}
+                <div className="relative z-10 flex items-center justify-between">
+                  <span className="text-[10px] font-mono font-bold text-white px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10">
+                    {r.tag}
                   </span>
-                  <span>·</span>
-                  <span>{r.views} pregleda</span>
+                  <div className="w-7 h-7 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                    <Play className="w-3.5 h-3.5 fill-white text-white translate-x-0.5" />
+                  </div>
                 </div>
-              </div>
-            </a>
+
+                {/* Bottom Meta */}
+                <div className="relative z-10 space-y-2">
+                  <h3 className="text-xs sm:text-sm font-display font-medium text-white line-clamp-2">
+                    {r.title}
+                  </h3>
+                  <div className="flex items-center space-x-3 text-[10px] font-mono text-neutral-300 pt-1 border-t border-white/10">
+                    <span className="flex items-center space-x-1">
+                      <Heart className="w-3 h-3 text-[#c8102e]" />
+                      <span>{r.likes}</span>
+                    </span>
+                    <span>·</span>
+                    <span>{r.views} pregleda</span>
+                  </div>
+                </div>
+              </a>
+            </RevealCard>
           ))}
         </div>
       </div>

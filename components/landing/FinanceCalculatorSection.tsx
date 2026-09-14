@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { RevealText } from '@/components/ui/RevealText';
+import { RevealText, RevealParagraph, RevealCard } from '@/components/ui/RevealText';
 import { OdometerNumber } from '@/components/ui/OdometerNumber';
 import { Calculator, FileText, CheckCircle2 } from 'lucide-react';
 
@@ -41,32 +41,36 @@ export function FinanceCalculatorSection() {
                   <span className="editorial-italic font-normal text-white">lizing</span>.
                 </h2>
               </RevealText>
-              <p className="mt-2 text-xs sm:text-sm text-neutral-400 font-light">
+              <RevealParagraph delay={0.3} className="mt-2 text-xs sm:text-sm text-neutral-400 font-light">
                 Brzo odobrenje bankarskih aranžmana na licu mesta u salonu u Nišu.
-              </p>
+              </RevealParagraph>
             </div>
 
             {/* Authentic Showroom Image */}
-            <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-950 border border-white/10 shadow-xl group">
-              <Image
-                src="/images/unnamed (2).webp"
-                alt="Car Box Finansiranje i Lizing u Salonu"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-white">
-                <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 flex items-center space-x-1.5">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                  <span>ODOBRENJE ZA 24H U SALONU</span>
-                </span>
-                <span className="text-neutral-300">CAR BOX</span>
+            <RevealCard delay={0.25}>
+              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-950 border border-white/10 shadow-xl group">
+                <Image
+                  src="/images/unnamed (2).webp"
+                  alt="Car Box Finansiranje i Lizing u Salonu"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-white">
+                  <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 flex items-center space-x-1.5">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                    <span>ODOBRENJE ZA 24H U SALONU</span>
+                  </span>
+                  <span className="text-neutral-300">CAR BOX</span>
+                </div>
               </div>
-            </div>
+            </RevealCard>
           </div>
 
           {/* Right Minimalist Slider Box */}
-          <div className="lg:col-span-7 luxury-card rounded-3xl p-6 sm:p-8 space-y-6">
+          <div className="lg:col-span-7">
+            <RevealCard delay={0.2}>
+              <div className="luxury-card rounded-3xl p-6 sm:p-8 space-y-6">
             {/* Live Monthly Rate Big Number */}
             <div className="p-6 rounded-2xl bg-neutral-950 border border-white/5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
               <div>
@@ -138,9 +142,11 @@ export function FinanceCalculatorSection() {
               <FileText className="w-4 h-4 text-[#c8102e]" />
               <span>Zatraži Zvaničnu Bankarsku Ponudu</span>
             </a>
-          </div>
+            </div>
+          </RevealCard>
         </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }

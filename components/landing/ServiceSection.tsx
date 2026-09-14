@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { CARBOX_SERVICES } from '@/lib/content/services';
-import { RevealText, RevealParagraph } from '@/components/ui/RevealText';
+import { RevealText, RevealParagraph, RevealCard } from '@/components/ui/RevealText';
 import { Wrench, CheckCircle2, PhoneCall, Calendar, ShieldCheck } from 'lucide-react';
 
 export function ServiceSection() {
@@ -49,26 +49,29 @@ export function ServiceSection() {
 
         {/* 4 Pillars */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-          {CARBOX_SERVICES.map((s) => (
-            <div key={s.id} className="luxury-card p-6 rounded-3xl space-y-3 flex flex-col justify-between">
-              <div>
-                <div className="text-[10px] font-mono text-[#c8102e] uppercase tracking-widest">
-                  {s.duration}
+          {CARBOX_SERVICES.map((s, idx) => (
+            <RevealCard key={s.id} delay={0.1 + idx * 0.08}>
+              <div className="luxury-card p-6 rounded-3xl space-y-3 flex flex-col justify-between h-full">
+                <div>
+                  <div className="text-[10px] font-mono text-[#c8102e] uppercase tracking-widest">
+                    {s.duration}
+                  </div>
+                  <h3 className="text-base font-display font-bold text-white mt-1">{s.title}</h3>
+                  <p className="text-xs text-neutral-400 font-light leading-relaxed mt-2">{s.shortDesc}</p>
                 </div>
-                <h3 className="text-base font-display font-bold text-white mt-1">{s.title}</h3>
-                <p className="text-xs text-neutral-400 font-light leading-relaxed mt-2">{s.shortDesc}</p>
-              </div>
 
-              <div className="pt-3 border-t border-neutral-850">
-                <div className="text-[9px] font-mono text-neutral-400 uppercase">CENA OD:</div>
-                <div className="text-sm font-mono font-bold text-white">{s.priceFromRsd.toLocaleString('sr-RS')} RSD</div>
+                <div className="pt-3 border-t border-neutral-850">
+                  <div className="text-[9px] font-mono text-neutral-400 uppercase">CENA OD:</div>
+                  <div className="text-sm font-mono font-bold text-white">{s.priceFromRsd.toLocaleString('sr-RS')} RSD</div>
+                </div>
               </div>
-            </div>
+            </RevealCard>
           ))}
         </div>
 
         {/* Simple Appointment Form with Authentic Facility Photo */}
-        <div className="luxury-card rounded-3xl p-6 sm:p-10">
+        <RevealCard delay={0.25}>
+          <div className="luxury-card rounded-3xl p-6 sm:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-5 space-y-4">
               <div>
@@ -173,6 +176,7 @@ export function ServiceSection() {
             </div>
           </div>
         </div>
+        </RevealCard>
       </div>
     </section>
   );

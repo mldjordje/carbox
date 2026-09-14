@@ -9,33 +9,14 @@ interface Props {
   duration?: number;
 }
 
-export function RevealText({ children, className = '', delay = 0, duration = 0.8 }: Props) {
-  return (
-    <div className={`overflow-hidden ${className}`}>
-      <motion.div
-        initial={{ y: '105%', opacity: 0.1, rotateX: 10 }}
-        whileInView={{ y: 0, opacity: 1, rotateX: 0 }}
-        viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
-        transition={{
-          duration,
-          delay,
-          ease: [0.16, 1, 0.3, 1],
-        }}
-      >
-        {children}
-      </motion.div>
-    </div>
-  );
-}
-
-export function RevealParagraph({ children, className = '', delay = 0.1 }: Props) {
+export function RevealText({ children, className = '', delay = 0, duration = 0.7 }: Props) {
   return (
     <motion.div
-      initial={{ y: 24, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
+      initial={{ opacity: 0, y: 28, filter: 'blur(8px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{
-        duration: 0.8,
+        duration,
         delay,
         ease: [0.16, 1, 0.3, 1],
       }}
@@ -45,3 +26,40 @@ export function RevealParagraph({ children, className = '', delay = 0.1 }: Props
     </motion.div>
   );
 }
+
+export function RevealParagraph({ children, className = '', delay = 0.1 }: Props) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{
+        duration: 0.75,
+        delay,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function RevealCard({ children, className = '', delay = 0.1 }: Props) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 36, scale: 0.98 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{
+        duration: 0.7,
+        delay,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+

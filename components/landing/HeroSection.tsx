@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Volume2, VolumeX, Play, Pause, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
-import { RevealText } from '@/components/ui/RevealText';
+import { RevealText, RevealParagraph, RevealCard } from '@/components/ui/RevealText';
 
 interface Props {
   onOpenTestDrive?: () => void;
@@ -130,28 +130,30 @@ export function HeroSection({ onOpenTestDrive, onSelectBrand }: Props) {
             </h1>
           </RevealText>
 
-          <p className="mt-4 text-xs sm:text-sm font-mono tracking-wider text-neutral-300 uppercase font-light">
+          <RevealParagraph delay={0.25} className="mt-4 text-xs sm:text-sm font-mono tracking-wider text-neutral-300 uppercase font-light">
             HONDA · PEUGEOT · OPEL · SUZUKI · VESPA · SEGWAY ATV
-          </p>
+          </RevealParagraph>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap items-center gap-3 pt-8">
-            <a
-              href="#3d-showroom"
-              className="flex items-center space-x-2 px-6 py-3.5 rounded-full bg-white hover:bg-neutral-200 text-black text-xs font-mono uppercase tracking-wider font-semibold transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] active:scale-95"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#c8102e]" />
-              <span>3D Digitalni Studio</span>
-            </a>
+          <RevealCard delay={0.3}>
+            <div className="flex flex-wrap items-center gap-3 pt-8">
+              <a
+                href="#3d-showroom"
+                className="flex items-center space-x-2 px-6 py-3.5 rounded-full bg-white hover:bg-neutral-200 text-black text-xs font-mono uppercase tracking-wider font-semibold transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] active:scale-95"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#c8102e]" />
+                <span>3D Digitalni Studio</span>
+              </a>
 
-            <a
-              href="#lager"
-              className="flex items-center space-x-2 px-6 py-3.5 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white text-xs font-mono uppercase tracking-wider transition-colors active:scale-95"
-            >
-              <span>Vozila Na Stanju</span>
-              <ArrowRight className="w-3.5 h-3.5 text-neutral-400" />
-            </a>
-          </div>
+              <a
+                href="#lager"
+                className="flex items-center space-x-2 px-6 py-3.5 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white text-xs font-mono uppercase tracking-wider transition-colors active:scale-95"
+              >
+                <span>Vozila Na Stanju</span>
+                <ArrowRight className="w-3.5 h-3.5 text-neutral-400" />
+              </a>
+            </div>
+          </RevealCard>
         </div>
 
         {/* Minimalist Bottom Facility Pill */}
